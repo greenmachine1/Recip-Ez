@@ -14,7 +14,16 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        
+    	<item name="android:actionBarStyle">@style/RecipEzActionBar</item>
+
+    </style>
+    
+    <!-- Theming for the action bar -->
+    <style name="RecipEzActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
+        
+        <item name="android:background">@color/action_bar_blue</item>
+        
     </style>
 
 </resources>
