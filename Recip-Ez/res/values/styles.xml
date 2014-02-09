@@ -1,10 +1,10 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
+    <style name="AppBaseTheme" parent="android:Theme.Holo">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -17,12 +17,24 @@
         
     	<item name="android:actionBarStyle">@style/RecipEzActionBar</item>
 
+    	
+
     </style>
     
     <!-- Theming for the action bar -->
-    <style name="RecipEzActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
+    <style name="RecipEzActionBar" parent="android:Widget.Holo.ActionBar">
         
         <item name="android:background">@color/action_bar_blue</item>
+        <item name="android:titleTextStyle">@style/ActionBarTextColor</item>
+        
+    </style>
+    
+    <!-- Color and text size for the action bar Text -->
+    <style name="ActionBarTextColor" parent="android:Widget.Holo.ActionBar">
+        
+        <item name="android:textColor">@color/white_text</item>
+        <item name="android:textSize">18sp</item>
+
         
     </style>
 

@@ -2,8 +2,20 @@
 
     <item
         android:id="@+id/favorites_icon"
+        android:title="Favorites"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:icon="@drawable/ic_launcher"/>
+        android:icon="@drawable/ic_favorites_solid"/>
+    <item
+        android:id="@+id/ingredients_search_icon"
+        android:title="Ingredients Search"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_ingredients_search"/>
+    <item
+        android:id="@+id/about_overflow"
+        android:title="About"
+        android:orderInCategory="100"
+        android:showAsAction="never"/>
 
 </menu>
