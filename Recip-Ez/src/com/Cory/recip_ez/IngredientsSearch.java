@@ -11,7 +11,7 @@ public class IngredientsSearch extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ingredients_activity);
 
-        
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         
     }
 }

@@ -27,10 +27,12 @@
             	  
         </activity>
         <activity android:name="About"
-            android:label="About">
+            android:label="About"
+            android:parentActivityName="com.Cory.recip_ez.MainActivity">
         </activity>
         <activity android:name="IngredientsSearch"
-            android:label="Ingredients Search">
+            android:label="Ingredients Search"
+            android:parentActivityName="com.Cory.recip_ez.MainActivity">
         </activity>
     </application>
 
