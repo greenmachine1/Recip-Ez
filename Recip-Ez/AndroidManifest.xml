@@ -22,6 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="Favorites"
+            android:label="Favorites">
+            	  
+        </activity>
+        <activity android:name="About"
+            android:label="About">
+        </activity>
+        <activity android:name="IngredientsSearch"
+            android:label="Ingredients Search">
+        </activity>
     </application>
 
 </manifest>
