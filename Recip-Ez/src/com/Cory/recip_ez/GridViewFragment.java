@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 public class GridViewFragment extends Fragment{
 	
@@ -13,6 +14,12 @@ public class GridViewFragment extends Fragment{
 		View view;
 		
 		view = inflater.inflate(R.layout.grid_view_fragment_layout, container, false);
+		
+		GridView gridView = (GridView)view.findViewById(R.id.gridView1);
+		
+		
+		
+
 
 		return view;
 		
