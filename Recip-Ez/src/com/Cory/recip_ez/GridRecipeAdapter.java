@@ -46,10 +46,10 @@ public class GridRecipeAdapter extends ArrayAdapter<GridViewAdapterDefinition>{
 			
 			holder = new GridRecipeAdapterHolder();
 			
+			// targetting the individual elements in the grid view item layout
 			holder.imgIcon = (ImageView)row.findViewById(R.id.recipe_image);
 			holder.txtTitle = (TextView)row.findViewById(R.id.title_text);
 
-			
 			row.setTag(holder);
 		}else{
 			
@@ -70,8 +70,6 @@ public class GridRecipeAdapter extends ArrayAdapter<GridViewAdapterDefinition>{
 	{
 		ImageView imgIcon;
 		TextView txtTitle;
-
-		
 	}
 
 	

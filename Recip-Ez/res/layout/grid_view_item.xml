@@ -20,6 +20,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Recipe name"
-        android:textSize="20sp" />
+        android:textSize="20sp" 
+        android:textColor="@color/grid_view_text"/>
 
 </RelativeLayout>
