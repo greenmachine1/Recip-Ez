@@ -14,7 +14,7 @@
     </GridView>
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/user_search_main"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

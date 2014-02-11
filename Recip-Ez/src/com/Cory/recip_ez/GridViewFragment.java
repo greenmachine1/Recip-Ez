@@ -2,17 +2,17 @@ package com.Cory.recip_ez;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 public class GridViewFragment extends Fragment{
+	
+	EditText userSearch;
 	
 	// my items arrayList
 	public ArrayList<GridViewAdapterDefinition> items = new ArrayList<GridViewAdapterDefinition>();
@@ -20,6 +20,7 @@ public class GridViewFragment extends Fragment{
 	// upon creation of the fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		
+		View view;
 		
 		// place holders for images
 		Integer[] imageIDs = {
@@ -38,7 +39,8 @@ public class GridViewFragment extends Fragment{
 		};
 		
 		
-		View view;
+		// targetting the user search box
+		userSearch = (EditText)getActivity().findViewById(R.id.user_search_main);
 		
 		// inflating my gridview fragment
 		view = inflater.inflate(R.layout.grid_view_fragment_layout, container, false);
