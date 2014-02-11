@@ -1,61 +1,32 @@
 package com.Cory.recip_ez;
 
+import java.util.List;
+
 import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
+import android.support.v4.app.FragmentActivity;
+import android.widget.ArrayAdapter;
 
-// -- Grid adapter section -- //
-public class GridRecipeAdapter extends BaseAdapter{
+
+
+public class GridRecipeAdapter extends ArrayAdapter<GridViewAdapterDefinition>{
 	
-	private Context context;
-	public Integer[] listOfImages = null;
+	Context context;
+	int layoutResourceId;
+	List<GridViewAdapterDefinition> data = null;
 	
-	public GridRecipeAdapter(Context c, Integer[] imageIDs){
-		context = c;
-		listOfImages = imageIDs;
-	}
-
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return listOfImages.length;
-	}
-
-	@Override
-	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return position;
-	}
-
-	@Override
-	public long getItemId(int position) {
-		// TODO Auto-generated method stub
-		return position;
-	}
-
-	
-	// setting the image to the individual squares
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	// constructor, takes in the context, the layoutResource
+	// and the data
+	public GridRecipeAdapter(Context context, int layoutResourceId,
+			List<GridViewAdapterDefinition> data) {
+		super(context, layoutResourceId, data);
 		
-		ImageView imageView;
-		if(convertView == null){
-			
-			imageView = new ImageView(context);
-			imageView.setLayoutParams(new GridView.LayoutParams(200,200));
-			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-			imageView.setPadding(10, 10, 10, 10);
+		this.layoutResourceId = layoutResourceId;
+		this.context = context;
+		this.data = data;
 		
-		}else{
-			imageView = (ImageView) convertView;
-		}
-		imageView.setImageResource(listOfImages[position]);
-		return imageView;
-
 	}
+
+	
+
 	
 }

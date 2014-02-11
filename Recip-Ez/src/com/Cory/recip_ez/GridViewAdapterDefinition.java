@@ -2,20 +2,22 @@ package com.Cory.recip_ez;
 
 public class GridViewAdapterDefinition {
 	
-	public int mainImage;
+	public Integer mainImage;
 	public String recipeTitle;
 	
 	public GridViewAdapterDefinition(){
 		super();
 	}
 
-	public GridViewAdapterDefinition(int mainImage, String recipeTitle){
+	public GridViewAdapterDefinition(Integer imageIDs, String titles){
 		super();
 		
-		this.mainImage = mainImage;
-		this.recipeTitle = recipeTitle;
+		this.mainImage = imageIDs;
+		this.recipeTitle = titles;
 		
 	}
+	
+	
 	
 	
 }

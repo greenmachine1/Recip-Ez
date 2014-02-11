@@ -14,11 +14,12 @@ import android.widget.ImageView;
 
 public class GridViewFragment extends Fragment{
 	
-	
-
+	// my items arrayList
+	public ArrayList<GridViewAdapterDefinition> items = new ArrayList<GridViewAdapterDefinition>();
 	
 	// upon creation of the fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		
 		
 		// place holders for images
 		Integer[] imageIDs = {
@@ -28,6 +29,14 @@ public class GridViewFragment extends Fragment{
 			R.drawable.main_logo
 		};
 		
+		// place holder for titles
+		String[] titles = {
+				"first",
+				"second",
+				"third",
+				"forth"
+		};
+		
 		
 		View view;
 		
@@ -35,8 +44,17 @@ public class GridViewFragment extends Fragment{
 		
 		GridView gridView = (GridView)view.findViewById(R.id.gridView1);
 		
-		// setting the gridview adapter
-		gridView.setAdapter(new GridRecipeAdapter(getActivity(), imageIDs));
+		for(int i = 0; i < titles.length; i++){
+			
+			GridViewAdapterDefinition item = new GridViewAdapterDefinition(imageIDs[i], titles[i]);
+			
+			// adding that to items
+			items.add(item);
+		}
+		
+		
+		// setting the gridview adapter and sending over the images
+		gridView.setAdapter(new GridRecipeAdapter(getActivity(), R.layout.grid_view_item,items));
 		
 		return view;
 		
