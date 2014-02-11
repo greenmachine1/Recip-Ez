@@ -3,6 +3,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color" >
-    
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/main_logo" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:text="Recip-Ez Version 1.0"
+        android:textSize="24sp"
+        android:textColor="@color/about_screen_black_text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="34dp"
+        android:gravity="center"
+        android:text="Recip-Ez is an Easy and straight forward application designed to make looking up recipes extremely easy."
+        android:textColor="@color/about_screen_light_text"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:gravity="center"
+        android:text="Thank you for trying this application"
+        android:textColor="@color/about_screen_light_text"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView01"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:text="Utilizes Pearson Food and Drink API 2014."
+        android:textColor="@color/about_screen_light_text"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView02"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="https://developer.pearson.com"
+        android:textColor="@color/about_screen_light_text"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView03"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Nutritional API powered by Edamam 2014."
+        android:textColor="@color/about_screen_light_text"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/TextView05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView04"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="http://developer.edamam.com"
+        android:textColor="@color/about_screen_light_text"
+        android:textSize="15sp" />
+		
 </RelativeLayout>
