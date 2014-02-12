@@ -38,18 +38,6 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:gravity="center"
-        android:text="Thank you for trying this application"
-        android:textColor="@color/about_screen_light_text"
-        android:textSize="15sp" />
-
-    <TextView
         android:id="@+id/TextView02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,6 +79,18 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="http://developer.edamam.com"
+        android:textColor="@color/about_screen_light_text"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="Thank you for trying this application"
         android:textColor="@color/about_screen_light_text"
         android:textSize="15sp" />
 		
