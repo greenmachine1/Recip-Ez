@@ -24,7 +24,9 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.main);
         
         
-        // starting of the service intent
+        // -- starting of the service intent
+        // -- this will be tied in with the 'go' button on the keypad
+        // -- that gets brought up when the user searches
         Intent serviceIntent = new Intent(this, PearsonAPIService.class);
         startService(serviceIntent);
         
