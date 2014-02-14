@@ -6,12 +6,15 @@ import java.net.URL;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
+import fileManager.FileManager;
 
 
 /*
  * -- this service goes out to the Pearson api and returns data
  */
 public class PearsonAPIService extends IntentService {
+	
+	public final String FILENAME = "pearsonJSON.txt";
 
 	public PearsonAPIService() {
 		super("PearsonAPIService");
@@ -37,6 +40,9 @@ public class PearsonAPIService extends IntentService {
 		// creating a temp string to hold the response
 		String response = "";
 		response = WebInfo.getURLStringResponse(finalURL);
+		
+		FileManager fileManager = new FileManager();
+		fileManager.writeStringFile(getApplicationContext(), FILENAME, response);
 
 		Log.i("json returned string", response);
 		
