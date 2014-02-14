@@ -7,6 +7,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 import fileManager.FileManager;
+import fileManager.ParseJSON;
 
 
 /*
@@ -18,13 +19,10 @@ public class PearsonAPIService extends IntentService {
 
 	public PearsonAPIService() {
 		super("PearsonAPIService");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		// TODO Auto-generated method stub
-
 		
 		// creation of url
 		String completeURL = "https://api.pearson.com/v2/foodanddrink/recipes?apikey=zTTymSsKBxBB59T9AoBBnyMgZ1VUW4AB";
@@ -37,7 +35,7 @@ public class PearsonAPIService extends IntentService {
 			e.printStackTrace();
 		}
 
-		// creating a temp string to hold the response
+		// temp string to hold the response
 		String response = "";
 		response = WebInfo.getURLStringResponse(finalURL);
 		
@@ -45,6 +43,9 @@ public class PearsonAPIService extends IntentService {
 		fileManager.writeStringFile(getApplicationContext(), FILENAME, response);
 
 		Log.i("json returned string", response);
+		
+		ParseJSON parseJSON = new ParseJSON();
+		parseJSON.loadJSON(this);
 		
 		// stops the service
 		stopSelf();
