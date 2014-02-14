@@ -7,6 +7,8 @@
  */
 package com.Cory.recip_ez;
 
+import com.Cory.service_package.PearsonAPIService;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -20,6 +22,14 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        
+        // starting of the service intent
+        Intent serviceIntent = new Intent(this, PearsonAPIService.class);
+        startService(serviceIntent);
+        
+        
+        
  
     }
 
