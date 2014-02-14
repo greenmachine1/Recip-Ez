@@ -35,6 +35,7 @@
             android:label="Ingredients Search"
             android:parentActivityName="com.Cory.recip_ez.MainActivity">
         </activity>
+        <service android:name="com.Cory.service_package.PearsonAPIService"></service>
     </application>
 
 </manifest>
