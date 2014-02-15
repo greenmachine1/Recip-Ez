@@ -48,12 +48,9 @@ public class ParseJSON extends Activity{
 			
 			// -- loading the entire file into a string for my json object
 			mainJSONString = fileManager.readStringFile(context, FILENAME);
-			
-			
-			fileManager.writeStringFile(context, "content.txt", mainJSONString);
-			
-			
-			
+						
+			Log.i("file contents", mainJSONString);
+
 			Log.i("It exsists", "true");
 			
 		// -- if the file does not exist....	

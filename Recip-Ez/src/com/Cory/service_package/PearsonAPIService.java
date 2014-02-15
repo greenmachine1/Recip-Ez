@@ -6,6 +6,7 @@ import java.net.URL;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 import fileManager.FileManager;
 import fileManager.ParseJSON;
 
@@ -16,7 +17,7 @@ import fileManager.ParseJSON;
 public class PearsonAPIService extends IntentService {
 	
 	public final String FILENAME = "pearsonJSON.txt";
-
+	
 	public PearsonAPIService() {
 		super("PearsonAPIService");
 	}
@@ -40,26 +41,15 @@ public class PearsonAPIService extends IntentService {
 		response = WebInfo.getURLStringResponse(finalURL);
 		
 		FileManager fileManager = new FileManager();
-		fileManager.writeStringFile(getApplicationContext(), FILENAME, response);
+		fileManager.writeStringFile(this, FILENAME, response);
 
 		Log.i("json returned string", response);
 		
-
 		
 		// stops the service
 		stopSelf();
 		
 		
-		
-	}
-
-	@Override
-	public void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		
-		ParseJSON parseJSON = new ParseJSON();
-		parseJSON.loadJSON(this);
 		
 	}
 

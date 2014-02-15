@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 
@@ -29,6 +30,9 @@ public class MainActivity extends FragmentActivity {
         // -- that gets brought up when the user searches
         Intent serviceIntent = new Intent(this, PearsonAPIService.class);
         startService(serviceIntent);
+        
+        Toast toast = Toast.makeText(this, "Loading...", Toast.LENGTH_LONG);
+		toast.show();
         
         
         

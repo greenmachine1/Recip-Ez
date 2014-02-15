@@ -7,6 +7,7 @@
  */
 package com.Cory.recip_ez;
 
+import fileManager.ParseJSON;
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -18,6 +19,11 @@ public class About extends Activity{
         setContentView(R.layout.about_layout);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        
+        ParseJSON parseJSON = new ParseJSON();
+		parseJSON.loadJSON(this);
+		
+		
         
     }
 	
