@@ -2,6 +2,7 @@ package fileManager;
 
 import java.io.File;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -18,6 +19,10 @@ public class ParseJSON extends Activity{
 	
 	private static ParseJSON parseJSON;
 	
+	FileManager fileManager;
+	
+	JSONObject mainJSONObject;
+	
 	File file;
 	
 	// the entire json string
@@ -32,19 +37,25 @@ public class ParseJSON extends Activity{
 	}
 	
 	
-	// loads json from the file
+	// -- loads json from the file
 	public void loadJSON(Context context){
 		
 		// -- if the file exists then do something....
 		file = context.getFileStreamPath(FILENAME);
 		if(file.exists() == true){
 			
-			FileManager fileManager = new FileManager();
+			fileManager = new FileManager();
 			
+			// -- loading the entire file into a string for my json object
 			mainJSONString = fileManager.readStringFile(context, FILENAME);
 			
 			
+			fileManager.writeStringFile(context, "content.txt", mainJSONString);
+			
+			
+			
 			Log.i("It exsists", "true");
+			
 		// -- if the file does not exist....	
 		}else{
 			

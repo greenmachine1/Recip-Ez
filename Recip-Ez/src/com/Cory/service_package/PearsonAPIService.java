@@ -44,13 +44,22 @@ public class PearsonAPIService extends IntentService {
 
 		Log.i("json returned string", response);
 		
-		ParseJSON parseJSON = new ParseJSON();
-		parseJSON.loadJSON(this);
+
 		
 		// stops the service
 		stopSelf();
 		
 		
+		
+	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		ParseJSON parseJSON = new ParseJSON();
+		parseJSON.loadJSON(this);
 		
 	}
 
