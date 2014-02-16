@@ -1,8 +1,12 @@
 package fileManager;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 
 import android.content.Context;
@@ -24,9 +28,9 @@ public class FileManager {
 		return file_Manager_instance;
 	}
 	
+	// -- works to write file 
 	public Boolean writeStringFile(Context context, String fileName, String content){
 		Boolean result = false;
-		
 		
 		FileOutputStream fos = null;
 		
@@ -41,37 +45,39 @@ public class FileManager {
 		return result;
 	}
 	
-	public String readStringFile(Context context, String filename){
-		String content = "";
-		
-		FileInputStream fis = null;
+
+	
+	// -- works to read the file contents
+	public String readNewFile(Context context, String fileName){
+		String tempString = "";
 		
 		try{
 			
-			fis = context.openFileInput(filename);
-			BufferedInputStream bis = new BufferedInputStream(fis);
-			byte[] contentBytes = new byte[1024];
-			int bytesRead = 0;
-			StringBuffer contentBuffer = new StringBuffer();
+			Log.i("in the midst of trying", "true");
+			File file = context.getFileStreamPath(fileName);
 			
-			while ((bytesRead = bis.read(contentBytes)) != 1){
-				content = new String(contentBytes, 0, bytesRead);
-				contentBuffer.append(content);
+			if(file.exists() && file.length() != 0){
+				
+				Log.i("file exists again", "true");
+				
+				BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+				String line;
+				
+				while((line = bufferedReader.readLine()) != null){
+					
+					tempString += line;
+					
+				}
 			}
 			
-			content = contentBuffer.toString();
-		} catch (Exception e) {
-			
-		} finally {
-			try {
-				fis.close();
-			} catch (IOException e) {
-				Log.e("Close file Error", e.toString());
-				//e.printStackTrace();
-			}
+		}catch(Exception e){
+			Log.e("error in writing", e.getMessage().toString());
 		}
 		
-		return content;
+		
+		return tempString;
 	}
+	
+
 	
 }

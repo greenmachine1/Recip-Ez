@@ -19,11 +19,7 @@ public class About extends Activity{
         setContentView(R.layout.about_layout);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        
-        ParseJSON parseJSON = new ParseJSON();
-		parseJSON.loadJSON(this);
-		
-		
+
         
     }
 	

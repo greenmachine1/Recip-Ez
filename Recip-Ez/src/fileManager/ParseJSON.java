@@ -37,35 +37,10 @@ public class ParseJSON extends Activity{
 	}
 	
 	
-	// -- loads json from the file
-	public void loadJSON(Context context){
-		
-		// -- if the file exists then do something....
-		file = context.getFileStreamPath(FILENAME);
-		if(file.exists() == true){
-			
-			fileManager = new FileManager();
-			
-			// -- loading the entire file into a string for my json object
-			mainJSONString = fileManager.readStringFile(context, FILENAME);
-						
-			Log.i("file contents", mainJSONString);
-
-			Log.i("It exsists", "true");
-			
-		// -- if the file does not exist....	
-		}else{
-			
-			Log.i("It exsists", "false");
-		}
-	}
-	
-	// this is the main screen gridview parsing
-	public void parseJSONforGridView(){
-		
-
+	public void parseJSONData(String data){
 		
 		
 	}
 	
+
 }

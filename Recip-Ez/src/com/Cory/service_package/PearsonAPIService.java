@@ -12,20 +12,22 @@ import fileManager.ParseJSON;
 
 
 /*
- * -- this service goes out to the Pearson api and returns data
+ * -- this service goes out to the Pearson api and saves data
  */
 public class PearsonAPIService extends IntentService {
 	
 	public final String FILENAME = "pearsonJSON.txt";
 	
+	
 	public PearsonAPIService() {
 		super("PearsonAPIService");
 	}
 
+	
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
-		// creation of url
+		// -- creation of url
 		String completeURL = "https://api.pearson.com/v2/foodanddrink/recipes?apikey=zTTymSsKBxBB59T9AoBBnyMgZ1VUW4AB";
 				
 		URL finalURL = null;
@@ -36,21 +38,27 @@ public class PearsonAPIService extends IntentService {
 			e.printStackTrace();
 		}
 
-		// temp string to hold the response
+		// -- temp string to hold the response
 		String response = "";
 		response = WebInfo.getURLStringResponse(finalURL);
 		
+		// -- writes string to file
 		FileManager fileManager = new FileManager();
-		fileManager.writeStringFile(this, FILENAME, response);
+		
+		String newString = "nope " + response + " yes";
+		fileManager.writeStringFile(this, FILENAME, newString);
+		
+		
 
 		Log.i("json returned string", response);
-		
-		
+				
 		// stops the service
 		stopSelf();
-		
-		
-		
+
 	}
+	
+	
+	
+	
 
 }
