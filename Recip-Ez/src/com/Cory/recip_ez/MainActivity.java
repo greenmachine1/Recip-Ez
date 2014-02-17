@@ -9,6 +9,8 @@ package com.Cory.recip_ez;
 
 import java.util.HashMap;
 
+import com.Cory.service_package.PearsonAPIService;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -28,17 +30,35 @@ public class MainActivity extends FragmentActivity {
         // -- starting of the service intent
         // -- this will be tied in with the 'go' button on the keypad
         // -- that gets brought up when the user searches
-        //Intent serviceIntent = new Intent(this, PearsonAPIService.class);
-        //startService(serviceIntent);
+        Intent serviceIntent = new Intent(this, PearsonAPIService.class);
+        
+        // -- this will be the extras that the user passes in via search 
+        serviceIntent.putExtra("search", "search value from user");
+        
+        // -- this is the random offset that will be generated
+        // -- to give a random recipe
+        serviceIntent.putExtra("offset", 20);
+        
+        startService(serviceIntent);
 
+// -- just for testing purposes ------------------------------------------- 
         HashMap<String, String> newHashMap = new HashMap<String, String>();
+        HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();
         
         ParseJSON newParseJSON = new ParseJSON(this);
-        newParseJSON.returnDirectionData();
+        //newParseJSON.returnDirectionData();
         
         newHashMap = newParseJSON.returnDirectionData();
+        ingredientsHashMap = newParseJSON.returnIngredients();
         
         Log.i("elements in returned hashMap -->", "" + newHashMap.size());
+        Log.i("titles in parsing", newParseJSON.returnTitles().toString());
+        
+        Log.i("elements in ingredients Hash Map", "" + ingredientsHashMap.size());
+        
+        
+        
+// -- just for testing purposes ------------------------------------------- 
         
     }
 

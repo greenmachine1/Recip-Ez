@@ -1,6 +1,7 @@
 package fileManager;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -32,10 +33,10 @@ public class ParseJSON{
 	
 	// -- constructor -- passes in the context
 	public ParseJSON(Context context) {
-		
 		_context = context;
-		
 	}
+	
+	
 	
 	
 	// -- checking to see if the file exists
@@ -49,6 +50,8 @@ public class ParseJSON{
 			return false;		
 		}
 	}
+	
+	
 	
 	
 	
@@ -69,6 +72,9 @@ public class ParseJSON{
 				
 				mainJSONArray = new JSONArray();
 				
+				// -- getting the results array from the json data
+				mainJSONArray = mainJSONObject.getJSONArray("results");
+				
 			} catch (JSONException e) {
 				Log.e("error with json", e.getMessage().toString());
 			}
@@ -83,21 +89,19 @@ public class ParseJSON{
 	
 	
 	
+	
+	
 	// -- goes through the json data and picks out the directions
 	public HashMap<String, String> returnDirectionData(){
 		
-		JSONArray directionsArray;
+		JSONArray directionsArray = new JSONArray();
 		String titleOfRecipe;
 		
 		HashMap<String, String> returnHashMap = new HashMap<String, String>();
 		
 		if(loadJSON() == true){
 			
-			try {
-			
-				// -- getting the results array from the json data
-				mainJSONArray = mainJSONObject.getJSONArray("results");
-				
+			try {				
 				// -- iterating through my array values
 				for(int i = 0; i < mainJSONArray.length(); i++){
 					
@@ -107,8 +111,8 @@ public class ParseJSON{
 					// -- getting the directions back from the main json data
 					directionsArray = mainJSONArray.getJSONObject(i).getJSONArray("directions");
 					
+					// -- inserting elements into the hashmap
 					returnHashMap.put(titleOfRecipe, directionsArray.toString());
-					
 				}
 			} catch (JSONException e) {
 			
@@ -119,6 +123,71 @@ public class ParseJSON{
 		// -- returning the hashmap
 		return returnHashMap;
 	}
+	
+	
+	
+	
+	// -- method for returning the titles
+	public ArrayList<String> returnTitles(){
+		
+		String titleOfRecipe;
+		
+		ArrayList<String> titleArrayList = new ArrayList<String>();
+		
+		if(loadJSON() == true){
+		
+			try{
+				for(int i = 0; i < mainJSONArray.length(); i++){	
+					titleOfRecipe = mainJSONArray.getJSONObject(i).getJSONObject("summary").getString("title");
+					titleArrayList.add(titleOfRecipe);
+				}
+				
+			}catch(Exception e){
+				Log.e("error in title", e.getMessage().toString());
+			}
+		}
+		// -- returning the arrayList of titles
+		return titleArrayList;
+	}
+	
+	
+	
+	// -- method for returning the ingredients
+	public HashMap<String, String> returnIngredients(){
+		
+		JSONArray ingredientsArray = new JSONArray();
+		
+		String titleOfRecipe;
+		
+		HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();
+		
+		if(loadJSON() == true){
+			
+			for(int i = 0; i < mainJSONArray.length(); i++){
+				
+				// -- getting the ingredients back from the main json data
+				try {
+					
+					ingredientsArray = mainJSONArray.getJSONObject(i).getJSONArray("ingredients");
+					
+					titleOfRecipe = mainJSONArray.getJSONObject(i).getJSONObject("summary").getString("title");
+					
+					// -- putting the ingredients into a hashMap
+					ingredientsHashMap.put(titleOfRecipe, ingredientsArray.toString());
+					
+				} catch (JSONException e) {
+					
+					e.printStackTrace();
+				}
+			}	
+		}
+		// -- returning the ingredients hashmap
+		return ingredientsHashMap;
+		
+	}
+	
+	
+	
 	
 
 }

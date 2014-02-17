@@ -27,6 +27,12 @@ public class PearsonAPIService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
+		// -- will be needing to get extras from the calling intent
+		String extraString = intent.getStringExtra("search");
+		int extraOffsetnumber = intent.getIntExtra("offset", 0);
+		Log.i("extras", extraString);
+		Log.i("offset extra", "" + extraOffsetnumber);
+		
 		// -- creation of url
 		String completeURL = "https://api.pearson.com/v2/foodanddrink/recipes?apikey=zTTymSsKBxBB59T9AoBBnyMgZ1VUW4AB";
 				
