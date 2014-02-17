@@ -32,11 +32,13 @@ public class FileManager {
 	public Boolean writeStringFile(Context context, String fileName, String content){
 		Boolean result = false;
 		
-		FileOutputStream fos = null;
+		FileOutputStream fileOutputStream = null;
 		
 		try {
-			fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-			fos.write(content.getBytes());
+			
+			// -- writing the contents
+			fileOutputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+			fileOutputStream.write(content.getBytes());
 			Log.i("Write String file", "Success");
 			
 		} catch (Exception e){
@@ -53,20 +55,21 @@ public class FileManager {
 		
 		try{
 			
-			Log.i("in the midst of trying", "true");
+			// -- gettin the contents of the file to make sure
+			// -- it actually exists
 			File file = context.getFileStreamPath(fileName);
 			
+			
+			// -- making sure its there and its length is greater than
+			// -- 0
 			if(file.exists() && file.length() != 0){
-				
-				Log.i("file exists again", "true");
 				
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 				String line;
 				
+				// -- appending data
 				while((line = bufferedReader.readLine()) != null){
-					
 					tempString += line;
-					
 				}
 			}
 			

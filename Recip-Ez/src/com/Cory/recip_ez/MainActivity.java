@@ -7,7 +7,7 @@
  */
 package com.Cory.recip_ez;
 
-import java.io.File;
+import java.util.HashMap;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,10 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.Cory.service_package.PearsonAPIService;
-
-import fileManager.FileManager;
+import fileManager.ParseJSON;
 
 public class MainActivity extends FragmentActivity {
 
@@ -31,27 +28,17 @@ public class MainActivity extends FragmentActivity {
         // -- starting of the service intent
         // -- this will be tied in with the 'go' button on the keypad
         // -- that gets brought up when the user searches
-        Intent serviceIntent = new Intent(this, PearsonAPIService.class);
-        startService(serviceIntent);
+        //Intent serviceIntent = new Intent(this, PearsonAPIService.class);
+        //startService(serviceIntent);
 
+        HashMap<String, String> newHashMap = new HashMap<String, String>();
         
-        // -- ok so this works to bring up the file correctly
-        File file = getApplicationContext().getFileStreamPath("pearsonJSON.txt");
-        if(file.exists() == true){
-        	Log.i("its there", "yes");
-        	
-        	FileManager fileManager = new FileManager();
-        	
-        	String tempString = fileManager.readNewFile(this, "pearsonJSON.txt"); 
-
-        	Log.i("contents of file", tempString);
-        	
-        	fileManager.writeStringFile(this, "new file", tempString);
-        	
-        	
-        }else{
-        	Log.i("it isnt there", "no");
-        }
+        ParseJSON newParseJSON = new ParseJSON(this);
+        newParseJSON.returnDirectionData();
+        
+        newHashMap = newParseJSON.returnDirectionData();
+        
+        Log.i("elements in returned hashMap -->", "" + newHashMap.size());
         
     }
 

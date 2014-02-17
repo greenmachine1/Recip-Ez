@@ -45,8 +45,7 @@ public class PearsonAPIService extends IntentService {
 		// -- writes string to file
 		FileManager fileManager = new FileManager();
 		
-		String newString = "nope " + response + " yes";
-		fileManager.writeStringFile(this, FILENAME, newString);
+		fileManager.writeStringFile(this, FILENAME, response);
 		
 		
 
