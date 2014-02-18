@@ -5,8 +5,8 @@
 
     <com.loopj.android.image.SmartImageView
         android:id="@+id/recipe_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_centerInParent="true"
 
         android:src="@drawable/main_logo" />
@@ -14,13 +14,13 @@
     <TextView
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_below="@+id/recipe_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="56dp"
         android:gravity="center"
         android:text="Recipe name"
-        android:textSize="20sp" 
-        android:textColor="@color/grid_view_text"/>
+        android:textColor="@color/grid_view_text"
+        android:textSize="20sp" />
 
 </RelativeLayout>

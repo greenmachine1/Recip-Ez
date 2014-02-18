@@ -7,21 +7,23 @@
  */
 package com.Cory.recip_ez;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import fileManager.ParseJSON;
 
 public class GridViewFragment extends Fragment{
@@ -36,49 +38,53 @@ public class GridViewFragment extends Fragment{
 	// my items arrayList
 	public ArrayList<GridViewAdapterDefinition> items = new ArrayList<GridViewAdapterDefinition>();
 	
-	public HashMap<String, String> titlesHashMap = new HashMap<String, String>();
+	public HashMap<String, String> imagesHashMap = new HashMap<String, String>();
+	
+	public ArrayList<String> urlArrayList = new ArrayList<String>();
+
 	
 	// upon creation of the fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		
 		_context = getActivity();
 		
-		ParseJSON newParseJson = new ParseJSON(_context);
-		
-		titlesHashMap = newParseJson.returnImageUrl();
-		
-		String totalUrl = BEGINNING_OF_URL + titlesHashMap.get("Chocolate Lava Cakes").toString();
-		
-		Log.i("hash stuff", totalUrl);
-
 		View view;
 		
+		ParseJSON newParseJson = new ParseJSON(_context);
 		
+		imagesHashMap = newParseJson.returnImageUrl();
 		
-		
-		
-		// place holders for images
-		Integer[] imageIDs = {
-			R.drawable.main_logo,
-			R.drawable.ic_ingredients,
-			R.drawable.ic_favorites_solid,
-			R.drawable.ic_launcher
-			
-		};
-		
-		// place holder for titles
-		String[] titles = {
-				"first",
-				"second",
-				"third",
-				"forth"
-		};
-		
+		// -- putting my hashmap into an arrayList
+		for(String value:imagesHashMap.values()){
+			urlArrayList.add(BEGINNING_OF_URL + value);
+		}
+
 
 		
 		
 		// targetting the user search box
 		userSearch = (EditText)getActivity().findViewById(R.id.user_search_main);
+		
+		
+		// the listener for when the user chooses to initiate the search
+		/*
+		userSearch.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				// TODO Auto-generated method stub
+				boolean handled = false;
+				if(actionId == EditorInfo.IME_ACTION_SEND){
+					
+					Log.i("user pushed search", "true");
+					handled = true;
+				}
+				
+				return handled;
+			}
+		});
+		*/
+		
 		
 		// inflating my gridview fragment
 		view = inflater.inflate(R.layout.grid_view_fragment_layout, container, false);
@@ -86,9 +92,10 @@ public class GridViewFragment extends Fragment{
 		GridView gridView = (GridView)view.findViewById(R.id.gridView1);
 		
 		// cycling through my titles and adding them to my GridViewAdapterDefinition
-		for(int i = 0; i < titles.length; i++){
+		for(int i = 0; i < 4; i++){
 			
-			GridViewAdapterDefinition item = new GridViewAdapterDefinition(totalUrl , titles[i]);
+			// -- loading the gridviewadapterdefinition with the image and title
+			GridViewAdapterDefinition item = new GridViewAdapterDefinition(urlArrayList.get(i).toString() , newParseJson.returnTitles().get(i).toString());
 			
 			// adding the item to my items ArrayList
 			items.add(item);

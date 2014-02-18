@@ -49,6 +49,8 @@ public class PearsonAPIService extends IntentService {
 		String response = "";
 		response = WebInfo.getURLStringResponse(finalURL);
 		
+		
+		
 		// -- writes string to file
 		FileManager fileManager = new FileManager();
 		
