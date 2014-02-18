@@ -187,7 +187,57 @@ public class ParseJSON{
 	}
 	
 	
-	
+	public HashMap<String, String> returnImageUrl(){
+		
+		String titleOfRecipe;
+		
+		String sizeString = "512x512";
+		
+		JSONArray imagesArray = new JSONArray();
+		
+		HashMap<String, String> imageUrlHashMap = new HashMap<String, String>();
+		
+		for(int i = 0; i < mainJSONArray.length(); i++){
+			
+			String finalUrlForImage = "";
+			
+			try {
+				
+				titleOfRecipe = mainJSONArray.getJSONObject(i).getJSONObject("summary").getString("title");
+				
+				imagesArray = mainJSONArray.getJSONObject(i).getJSONArray("images");
+				
+				// -- cycling through my images array to find the right image to 
+				// -- return
+				for(int j = 0; j < imagesArray.length(); j++){
+					
+					String imageString = imagesArray.getJSONObject(j).getString("url");
+					
+					// -- if the image string contains "512x512"
+					// -- then it is the final string that gets returned
+					if(imageString.contains(sizeString) == true){
+						
+						finalUrlForImage = imageString;
+					}
+
+				}
+				
+				// -- adding in the name of the recipe and
+				// -- the final url for the image
+				imageUrlHashMap.put(titleOfRecipe, finalUrlForImage);
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+		
+		// -- returning the image hashmap
+		return imageUrlHashMap;
+	}
 	
 
 }
