@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.util.Log;
 
 /*
@@ -234,9 +236,28 @@ public class ParseJSON{
 			
 		}
 		
-		
 		// -- returning the image hashmap
 		return imageUrlHashMap;
+	}
+	
+	
+	// -- my async task for going out and downloading the images
+	private class downloadImages extends AsyncTask<String, Void, Bitmap>{
+
+		@Override
+		protected Bitmap doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+		}
+		
+		
+		
 	}
 	
 

@@ -29,9 +29,10 @@ public class PearsonAPIService extends IntentService {
 		
 		// -- will be needing to get extras from the calling intent
 		String extraString = intent.getStringExtra("search");
-		int extraOffsetnumber = intent.getIntExtra("offset", 0);
+		String extraOffsetnumber = "" + intent.getIntExtra("offset", 0);
+		
 		Log.i("extras", extraString);
-		Log.i("offset extra", "" + extraOffsetnumber);
+		Log.i("offset extra", extraOffsetnumber);
 		
 		// -- creation of url
 		String completeURL = "https://api.pearson.com/v2/foodanddrink/recipes?apikey=zTTymSsKBxBB59T9AoBBnyMgZ1VUW4AB";
@@ -52,8 +53,6 @@ public class PearsonAPIService extends IntentService {
 		FileManager fileManager = new FileManager();
 		
 		fileManager.writeStringFile(this, FILENAME, response);
-		
-		
 
 		Log.i("json returned string", response);
 				
