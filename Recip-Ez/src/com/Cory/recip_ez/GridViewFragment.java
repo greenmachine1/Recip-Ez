@@ -18,12 +18,10 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import fileManager.ParseJSON;
 
 public class GridViewFragment extends Fragment{
@@ -41,6 +39,8 @@ public class GridViewFragment extends Fragment{
 	public HashMap<String, String> imagesHashMap = new HashMap<String, String>();
 	
 	public ArrayList<String> urlArrayList = new ArrayList<String>();
+	
+	public ArrayList<String> nameOfRecipeArrayList = new ArrayList<String>();
 
 	
 	// upon creation of the fragment
@@ -58,36 +58,37 @@ public class GridViewFragment extends Fragment{
 		for(String value:imagesHashMap.values()){
 			urlArrayList.add(BEGINNING_OF_URL + value);
 		}
+		
+		// -- putting the name from the images hashmap into 
+		// -- an array list
+		for(String name:imagesHashMap.keySet()){
+			nameOfRecipeArrayList.add(name);
+		}
+		
 
-
+		// inflating my gridview fragment
+		view = inflater.inflate(R.layout.grid_view_fragment_layout, container, false);
+		
 		
 		
 		// targetting the user search box
-		userSearch = (EditText)getActivity().findViewById(R.id.user_search_main);
-		
-		
-		// the listener for when the user chooses to initiate the search
-		/*
-		userSearch.setOnEditorActionListener(new OnEditorActionListener() {
-			
+		userSearch = (EditText)view.findViewById(R.id.user_search_main);
+		userSearch.setOnKeyListener(new OnKeyListener(){
+
 			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				// TODO Auto-generated method stub
-				boolean handled = false;
-				if(actionId == EditorInfo.IME_ACTION_SEND){
-					
-					Log.i("user pushed search", "true");
-					handled = true;
-				}
+			public boolean onKey(View viewText, int keyCode, KeyEvent event) {
 				
-				return handled;
+				if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
+					
+					String userEntered = userSearch.getText().toString();
+					
+					Log.i("user has pressed enter", userEntered);
+					
+					return true;
+				}
+				return false;
 			}
 		});
-		*/
-		
-		
-		// inflating my gridview fragment
-		view = inflater.inflate(R.layout.grid_view_fragment_layout, container, false);
 		
 		GridView gridView = (GridView)view.findViewById(R.id.gridView1);
 		
@@ -95,7 +96,7 @@ public class GridViewFragment extends Fragment{
 		for(int i = 0; i < 4; i++){
 			
 			// -- loading the gridviewadapterdefinition with the image and title
-			GridViewAdapterDefinition item = new GridViewAdapterDefinition(urlArrayList.get(i).toString() , newParseJson.returnTitles().get(i).toString());
+			GridViewAdapterDefinition item = new GridViewAdapterDefinition(urlArrayList.get(i).toString() , nameOfRecipeArrayList.get(i).toString());
 			
 			// adding the item to my items ArrayList
 			items.add(item);
@@ -109,5 +110,7 @@ public class GridViewFragment extends Fragment{
 		return view;
 		
 	}
+	
+
 
 }
