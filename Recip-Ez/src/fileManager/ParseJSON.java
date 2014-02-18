@@ -1,16 +1,22 @@
 package fileManager;
 
+
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 /*
@@ -18,6 +24,7 @@ import android.util.Log;
  */
 
 public class ParseJSON{
+
 
 	public final String FILENAME = "pearsonJSON.txt";
 	
@@ -199,41 +206,44 @@ public class ParseJSON{
 		
 		HashMap<String, String> imageUrlHashMap = new HashMap<String, String>();
 		
-		for(int i = 0; i < mainJSONArray.length(); i++){
-			
-			String finalUrlForImage = "";
-			
-			try {
+		if(loadJSON() == true){
+		
+			for(int i = 0; i < mainJSONArray.length(); i++){
 				
-				titleOfRecipe = mainJSONArray.getJSONObject(i).getJSONObject("summary").getString("title");
+				String finalUrlForImage = "";
 				
-				imagesArray = mainJSONArray.getJSONObject(i).getJSONArray("images");
-				
-				// -- cycling through my images array to find the right image to 
-				// -- return
-				for(int j = 0; j < imagesArray.length(); j++){
+				try {
 					
-					String imageString = imagesArray.getJSONObject(j).getString("url");
+					titleOfRecipe = mainJSONArray.getJSONObject(i).getJSONObject("summary").getString("title");
 					
-					// -- if the image string contains "512x512"
-					// -- then it is the final string that gets returned
-					if(imageString.contains(sizeString) == true){
+					imagesArray = mainJSONArray.getJSONObject(i).getJSONArray("images");
+					
+					// -- cycling through my images array to find the right image to 
+					// -- return
+					for(int j = 0; j < imagesArray.length(); j++){
 						
-						finalUrlForImage = imageString;
+						String imageString = imagesArray.getJSONObject(j).getString("url");
+						
+						// -- if the image string contains "512x512"
+						// -- then it is the final string that gets returned
+						if(imageString.contains(sizeString) == true){
+							
+							finalUrlForImage = imageString;
+						}
+	
 					}
-
+					
+					// -- adding in the name of the recipe and
+					// -- the final url for the image
+					imageUrlHashMap.put(titleOfRecipe, finalUrlForImage);
+									
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				
-				// -- adding in the name of the recipe and
-				// -- the final url for the image
-				imageUrlHashMap.put(titleOfRecipe, finalUrlForImage);
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	
 			}
-			
-			
 		}
 		
 		// -- returning the image hashmap
@@ -241,24 +251,38 @@ public class ParseJSON{
 	}
 	
 	
-	// -- my async task for going out and downloading the images
-	private class downloadImages extends AsyncTask<String, Void, Bitmap>{
+	
+	
+	
+	// -- this downloads the image and puts it into drawable format
+	public Drawable LoadImagesFromURL(String url){
 
-		@Override
-		protected Bitmap doInBackground(String... params) {
-			// TODO Auto-generated method stub
-			return null;
+		try {
+			
+			InputStream inputStream = (InputStream) new URL(url).getContent();
+			Drawable drawable = Drawable.createFromStream(inputStream, "src");
+			return drawable;
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		@Override
-		protected void onPostExecute(Bitmap result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-		}
 		
 		
 		
+		return null;
 	}
+	
+	
+	
+	
+	
+	
+	
+
 	
 
 }

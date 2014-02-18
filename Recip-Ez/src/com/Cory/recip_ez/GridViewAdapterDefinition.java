@@ -7,6 +7,8 @@
  */
 package com.Cory.recip_ez;
 
+
+
 public class GridViewAdapterDefinition {
 	
 	public Integer mainImage;

@@ -8,26 +8,50 @@
 package com.Cory.recip_ez;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridView;
+import fileManager.ParseJSON;
 
 public class GridViewFragment extends Fragment{
 	
 	EditText userSearch;
+
+	
+
 	
 	// my items arrayList
 	public ArrayList<GridViewAdapterDefinition> items = new ArrayList<GridViewAdapterDefinition>();
 	
+	public HashMap<String, String> imageHashMap = new HashMap<String, String>();
+	
 	// upon creation of the fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		
+		Context context = getActivity();
+		
+		ParseJSON newParseJson = new ParseJSON(context);
+		
+		imageHashMap = newParseJson.returnImageUrl();
+		
+		Log.i("image urls", imageHashMap.toString());
+
+		
+		
+		
+		
 		View view;
+		
+		
 		
 		// place holders for images
 		Integer[] imageIDs = {
@@ -35,6 +59,7 @@ public class GridViewFragment extends Fragment{
 			R.drawable.ic_ingredients,
 			R.drawable.ic_favorites_solid,
 			R.drawable.ic_launcher
+			
 		};
 		
 		// place holder for titles
@@ -45,6 +70,7 @@ public class GridViewFragment extends Fragment{
 				"forth"
 		};
 		
+
 		
 		// targetting the user search box
 		userSearch = (EditText)getActivity().findViewById(R.id.user_search_main);
@@ -57,7 +83,7 @@ public class GridViewFragment extends Fragment{
 		// cycling through my titles and adding them to my GridViewAdapterDefinition
 		for(int i = 0; i < titles.length; i++){
 			
-			GridViewAdapterDefinition item = new GridViewAdapterDefinition(imageIDs[i], titles[i]);
+			GridViewAdapterDefinition item = new GridViewAdapterDefinition(imageIDs[i] , titles[i]);
 			
 			// adding the item to my items ArrayList
 			items.add(item);

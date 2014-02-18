@@ -44,7 +44,7 @@ public class MainActivity extends FragmentActivity {
         HashMap<String, String> newHashMap = new HashMap<String, String>();
         HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();
         HashMap<String, String> imagesHashMap = new HashMap<String, String>();
-        
+        /*
         ParseJSON newParseJSON = new ParseJSON(this);
 
         
@@ -59,7 +59,7 @@ public class MainActivity extends FragmentActivity {
         
         // -- returns the url for 512x512 image size
         Log.i("image url ", imagesHashMap.get("Grilled Buffalo Steak"));
-        
+        */
         
         
 // -- just for testing purposes ------------------------------------------- 
