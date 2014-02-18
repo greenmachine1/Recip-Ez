@@ -11,17 +11,17 @@ package com.Cory.recip_ez;
 
 public class GridViewAdapterDefinition {
 	
-	public Integer mainImage;
+	public String mainImage;
 	public String recipeTitle;
 	
 	public GridViewAdapterDefinition(){
 		super();
 	}
 
-	public GridViewAdapterDefinition(Integer imageIDs, String titles){
+	public GridViewAdapterDefinition(String totalUrl, String titles){
 		super();
 		
-		this.mainImage = imageIDs;
+		this.mainImage = totalUrl;
 		this.recipeTitle = titles;
 		
 	}

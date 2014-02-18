@@ -9,6 +9,8 @@ package com.Cory.recip_ez;
 
 import java.util.List;
 
+import com.loopj.android.image.SmartImageView;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -54,7 +56,7 @@ public class GridRecipeAdapter extends ArrayAdapter<GridViewAdapterDefinition>{
 			holder = new GridRecipeAdapterHolder();
 			
 			// targetting the individual elements in the grid view item layout
-			holder.imgIcon = (ImageView)row.findViewById(R.id.recipe_image);
+			holder.imgIcon = (SmartImageView)row.findViewById(R.id.recipe_image);
 			holder.txtTitle = (TextView)row.findViewById(R.id.title_text);
 
 			row.setTag(holder);
@@ -67,7 +69,7 @@ public class GridRecipeAdapter extends ArrayAdapter<GridViewAdapterDefinition>{
 		GridViewAdapterDefinition gridRecipeAdapter = getItem(position);
 		
 		holder.txtTitle.setText(gridRecipeAdapter.recipeTitle);
-		holder.imgIcon.setImageResource(gridRecipeAdapter.mainImage);
+		holder.imgIcon.setImageUrl(gridRecipeAdapter.mainImage);
 
 		return row;
 		
@@ -75,7 +77,7 @@ public class GridRecipeAdapter extends ArrayAdapter<GridViewAdapterDefinition>{
 	
 	static class GridRecipeAdapterHolder
 	{
-		ImageView imgIcon;
+		SmartImageView imgIcon;
 		TextView txtTitle;
 	}
 

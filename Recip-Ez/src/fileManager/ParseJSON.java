@@ -3,20 +3,18 @@ package fileManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 /*
@@ -249,40 +247,6 @@ public class ParseJSON{
 		// -- returning the image hashmap
 		return imageUrlHashMap;
 	}
-	
-	
-	
-	
-	
-	// -- this downloads the image and puts it into drawable format
-	public Drawable LoadImagesFromURL(String url){
 
-		try {
-			
-			InputStream inputStream = (InputStream) new URL(url).getContent();
-			Drawable drawable = Drawable.createFromStream(inputStream, "src");
-			return drawable;
-			
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		return null;
-	}
-	
-	
-	
-	
-	
-	
-	
-
-	
 
 }

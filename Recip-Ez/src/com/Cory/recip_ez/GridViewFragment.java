@@ -7,6 +7,8 @@
  */
 package com.Cory.recip_ez;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,30 +28,32 @@ public class GridViewFragment extends Fragment{
 	
 	EditText userSearch;
 
+	Context _context;
 	
+	public final String BEGINNING_OF_URL = "https://api.pearson.com";
 
 	
 	// my items arrayList
 	public ArrayList<GridViewAdapterDefinition> items = new ArrayList<GridViewAdapterDefinition>();
 	
-	public HashMap<String, String> imageHashMap = new HashMap<String, String>();
+	public HashMap<String, String> titlesHashMap = new HashMap<String, String>();
 	
 	// upon creation of the fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		
-		Context context = getActivity();
+		_context = getActivity();
 		
-		ParseJSON newParseJson = new ParseJSON(context);
+		ParseJSON newParseJson = new ParseJSON(_context);
 		
-		imageHashMap = newParseJson.returnImageUrl();
+		titlesHashMap = newParseJson.returnImageUrl();
 		
-		Log.i("image urls", imageHashMap.toString());
+		String totalUrl = BEGINNING_OF_URL + titlesHashMap.get("Chocolate Lava Cakes").toString();
+		
+		Log.i("hash stuff", totalUrl);
 
-		
-		
-		
-		
 		View view;
+		
+		
 		
 		
 		
@@ -72,6 +76,7 @@ public class GridViewFragment extends Fragment{
 		
 
 		
+		
 		// targetting the user search box
 		userSearch = (EditText)getActivity().findViewById(R.id.user_search_main);
 		
@@ -83,7 +88,7 @@ public class GridViewFragment extends Fragment{
 		// cycling through my titles and adding them to my GridViewAdapterDefinition
 		for(int i = 0; i < titles.length; i++){
 			
-			GridViewAdapterDefinition item = new GridViewAdapterDefinition(imageIDs[i] , titles[i]);
+			GridViewAdapterDefinition item = new GridViewAdapterDefinition(totalUrl , titles[i]);
 			
 			// adding the item to my items ArrayList
 			items.add(item);
