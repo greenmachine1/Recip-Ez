@@ -7,7 +7,7 @@
  */
 package com.Cory.recip_ez;
 
-import java.util.HashMap;
+
 
 import com.Cory.service_package.PearsonAPIService;
 
@@ -17,7 +17,6 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import fileManager.ParseJSON;
 
 public class MainActivity extends FragmentActivity {
 
@@ -26,7 +25,6 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-// -- just for testing purposes -------------------------------------------        
         // -- starting of the service intent
         // -- this will be tied in with the 'go' button on the keypad
         // -- that gets brought up when the user searches
@@ -34,17 +32,17 @@ public class MainActivity extends FragmentActivity {
         Intent serviceIntent = new Intent(this, PearsonAPIService.class);
         
         // -- this will be the extras that the user passes in via search 
-        serviceIntent.putExtra("search", "search value from user");
+        serviceIntent.putExtra("search", "");
         
         // -- this is the random offset that will be generated
         // -- to give a random recipe
-        serviceIntent.putExtra("offset", 20);
+        serviceIntent.putExtra("offset", 30);
         
         startService(serviceIntent);
 
         
         
-// -- just for testing purposes ------------------------------------------- 
+
         
     }
 

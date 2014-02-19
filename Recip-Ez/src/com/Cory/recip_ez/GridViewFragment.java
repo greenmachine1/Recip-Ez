@@ -53,25 +53,7 @@ public class GridViewFragment extends Fragment{
 		newGridRecipeAdapter = new GridRecipeAdapter(getActivity(), R.layout.grid_view_item, items);
 
 		View view;
-		
-		/*
-		ParseJSON newParseJson = new ParseJSON(getActivity());
-		
-		imagesHashMap = newParseJson.returnImageUrl();
 
-		// -- putting my hashmap into an arrayList
-		for(String value:imagesHashMap.values()){
-			urlArrayList.add(BEGINNING_OF_URL + value);
-		}
-		
-		// -- putting the name from the images hashmap into 
-		// -- an array list
-		for(String name:imagesHashMap.keySet()){
-			nameOfRecipeArrayList.add(name);
-		}
-		*/
-		
-		
 		
 		// -- section gets info from the PearsonAPIService and loads it into the 
 		// -- grid array when it finishes loading all the data

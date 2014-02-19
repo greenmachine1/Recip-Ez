@@ -28,6 +28,8 @@ public class PearsonAPIService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
+		String completeURL = "";
+		
 		// -- will be needing to get extras from the calling intent
 		String extraString = intent.getStringExtra("search");
 		String extraOffsetnumber = "" + intent.getIntExtra("offset", 0);
@@ -35,8 +37,14 @@ public class PearsonAPIService extends IntentService {
 		Log.i("extras", extraString);
 		Log.i("offset extra", extraOffsetnumber);
 		
-		// -- creation of url
-		String completeURL = "https://api.pearson.com/v2/foodanddrink/recipes?apikey=zTTymSsKBxBB59T9AoBBnyMgZ1VUW4AB";
+		// -- this is the search extras that is passed in
+		if(!(extraString.isEmpty())){
+			// -- adding in the users search
+			completeURL = "https://api.pearson.com/v2/foodanddrink/recipes?offset=0&search=" + extraString +"&apikey=zTTymSsKBxBB59T9AoBBnyMgZ1VUW4AB";
+		}else{
+			// -- default URL
+			completeURL = "https://api.pearson.com/v2/foodanddrink/recipes?offset=" + extraOffsetnumber + "&apikey=zTTymSsKBxBB59T9AoBBnyMgZ1VUW4AB";
+		}
 				
 		URL finalURL = null;
 		try {
