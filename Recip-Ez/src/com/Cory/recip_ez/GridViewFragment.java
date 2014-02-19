@@ -54,9 +54,10 @@ public class GridViewFragment extends Fragment{
 		newGridRecipeAdapter = new GridRecipeAdapter(getActivity(), R.layout.grid_view_item, items);
 
 		View view;
+		
+		// -- inflating my gridview fragment
+		view = inflater.inflate(R.layout.grid_view_fragment_layout, container, false);
 
-		
-		
 		// -- section gets info from the PearsonAPIService and loads it into the 
 		// -- grid array when it finishes loading all the data
 		IntentFilter intentFilter = new IntentFilter("android.intent.action.MAIN");
@@ -108,9 +109,7 @@ public class GridViewFragment extends Fragment{
 		// -- setting the reciever to be registered
 		getActivity().registerReceiver(myReciever, intentFilter);
 
-		// -- inflating my gridview fragment
-		view = inflater.inflate(R.layout.grid_view_fragment_layout, container, false);
-		
+
 		
 		
 		
@@ -128,6 +127,9 @@ public class GridViewFragment extends Fragment{
 
 					// -- starts the available recipes intent
 					Intent availableRecipesIntent = new Intent(getActivity(), AvailableRecipes.class);
+					
+					// -- sending over the user input search
+					availableRecipesIntent.putExtra("search", userEntered);
 					
 					startActivity(availableRecipesIntent);
 					

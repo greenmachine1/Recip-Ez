@@ -11,6 +11,11 @@ public class AvailableRecipes extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.available_recipes_layout);
+        
+        
+        
+        
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 	
 	
