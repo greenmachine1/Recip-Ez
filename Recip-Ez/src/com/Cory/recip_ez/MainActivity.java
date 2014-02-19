@@ -30,6 +30,7 @@ public class MainActivity extends FragmentActivity {
         // -- starting of the service intent
         // -- this will be tied in with the 'go' button on the keypad
         // -- that gets brought up when the user searches
+        
         Intent serviceIntent = new Intent(this, PearsonAPIService.class);
         
         // -- this will be the extras that the user passes in via search 
@@ -41,25 +42,6 @@ public class MainActivity extends FragmentActivity {
         
         startService(serviceIntent);
 
-        HashMap<String, String> newHashMap = new HashMap<String, String>();
-        HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();
-        HashMap<String, String> imagesHashMap = new HashMap<String, String>();
-        /*
-        ParseJSON newParseJSON = new ParseJSON(this);
-
-        
-        newHashMap = newParseJSON.returnDirectionData();
-        ingredientsHashMap = newParseJSON.returnIngredients();
-        imagesHashMap = newParseJSON.returnImageUrl();
-        
-        Log.i("elements in returned hashMap -->", "" + newHashMap.size());
-        Log.i("titles in parsing", newParseJSON.returnTitles().toString());
-        
-        Log.i("elements in ingredients Hash Map", "" + ingredientsHashMap.size());
-        
-        // -- returns the url for 512x512 image size
-        Log.i("image url ", imagesHashMap.get("Grilled Buffalo Steak"));
-        */
         
         
 // -- just for testing purposes ------------------------------------------- 

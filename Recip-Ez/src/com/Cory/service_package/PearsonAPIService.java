@@ -3,12 +3,13 @@ package com.Cory.service_package;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.Cory.recip_ez.GridViewFragment;
+
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 import fileManager.FileManager;
-import fileManager.ParseJSON;
+
 
 
 /*
@@ -57,11 +58,17 @@ public class PearsonAPIService extends IntentService {
 		fileManager.writeStringFile(this, FILENAME, response);
 
 		Log.i("json returned string", response);
+		
+		// -- sends out a true signal that the service has ended
+		Intent newIntent = new Intent("android.intent.action.MAIN").putExtra("DONE", true);
+		this.sendBroadcast(newIntent);
 				
 		// stops the service
-		stopSelf();
+		this.stopSelf();
 
 	}
+
+
 	
 	
 	

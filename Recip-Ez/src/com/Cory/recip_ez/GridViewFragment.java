@@ -11,7 +11,10 @@ package com.Cory.recip_ez;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -27,12 +30,11 @@ import fileManager.ParseJSON;
 public class GridViewFragment extends Fragment{
 	
 	EditText userSearch;
-
-	Context _context;
+	
+	GridRecipeAdapter newGridRecipeAdapter;
 	
 	public final String BEGINNING_OF_URL = "https://api.pearson.com";
 
-	
 	// my items arrayList
 	public ArrayList<GridViewAdapterDefinition> items = new ArrayList<GridViewAdapterDefinition>();
 	
@@ -41,19 +43,22 @@ public class GridViewFragment extends Fragment{
 	public ArrayList<String> urlArrayList = new ArrayList<String>();
 	
 	public ArrayList<String> nameOfRecipeArrayList = new ArrayList<String>();
+	
+	private BroadcastReceiver myReciever;
 
 	
 	// upon creation of the fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-		
-		_context = getActivity();
-		
+
+		newGridRecipeAdapter = new GridRecipeAdapter(getActivity(), R.layout.grid_view_item, items);
+
 		View view;
 		
-		ParseJSON newParseJson = new ParseJSON(_context);
+		/*
+		ParseJSON newParseJson = new ParseJSON(getActivity());
 		
 		imagesHashMap = newParseJson.returnImageUrl();
-		
+
 		// -- putting my hashmap into an arrayList
 		for(String value:imagesHashMap.values()){
 			urlArrayList.add(BEGINNING_OF_URL + value);
@@ -64,12 +69,63 @@ public class GridViewFragment extends Fragment{
 		for(String name:imagesHashMap.keySet()){
 			nameOfRecipeArrayList.add(name);
 		}
+		*/
 		
+		
+		
+		// -- section gets info from the PearsonAPIService and loads it into the 
+		// -- grid array when it finishes loading all the data
+		IntentFilter intentFilter = new IntentFilter("android.intent.action.MAIN");
+		
+		myReciever = new BroadcastReceiver(){
+
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				// TODO Auto-generated method stub
+				
+				imagesHashMap.clear();
+				
+				boolean intentThing = intent.getBooleanExtra("DONE", false);
+				Log.i("returned value", "" + intentThing);
+				if(intentThing == true){
+					
+					
+					ParseJSON newParseJson = new ParseJSON(context);
+					
+					imagesHashMap = newParseJson.returnImageUrl();
+
+					// -- putting my hashmap into an arrayList
+					for(String value:imagesHashMap.values()){
+						urlArrayList.add(BEGINNING_OF_URL + value);
+					}
+					
+					// -- putting the name from the images hashmap into 
+					// -- an array list
+					for(String name:imagesHashMap.keySet()){
+						nameOfRecipeArrayList.add(name);
+					}
+					
+					// cycling through my titles and adding them to my GridViewAdapterDefinition
+					for(int i = 0; i < imagesHashMap.size(); i++){
+						
+						// -- loading the gridviewadapterdefinition with the image and title
+						GridViewAdapterDefinition item = new GridViewAdapterDefinition(urlArrayList.get(i).toString() , nameOfRecipeArrayList.get(i).toString());
+						
+						// adding the item to my items ArrayList
+						items.add(item);
+					}
+				}
+				newGridRecipeAdapter.notifyDataSetChanged();
+				
+			}
+			
+		};
+
+		// -- setting the reciever to be registered
+		getActivity().registerReceiver(myReciever, intentFilter);
 
 		// inflating my gridview fragment
 		view = inflater.inflate(R.layout.grid_view_fragment_layout, container, false);
-		
-		
 		
 		// targetting the user search box
 		userSearch = (EditText)view.findViewById(R.id.user_search_main);
@@ -91,25 +147,19 @@ public class GridViewFragment extends Fragment{
 		});
 		
 		GridView gridView = (GridView)view.findViewById(R.id.gridView1);
-		
-		// cycling through my titles and adding them to my GridViewAdapterDefinition
-		for(int i = 0; i < 4; i++){
+
 			
-			// -- loading the gridviewadapterdefinition with the image and title
-			GridViewAdapterDefinition item = new GridViewAdapterDefinition(urlArrayList.get(i).toString() , nameOfRecipeArrayList.get(i).toString());
-			
-			// adding the item to my items ArrayList
-			items.add(item);
-		}
-		
-		
 		// setting the gridview adapter and sending over the images
 		// context, layout for each element, then the elements themselves
-		gridView.setAdapter(new GridRecipeAdapter(getActivity(), R.layout.grid_view_item, items));
+		gridView.setAdapter(newGridRecipeAdapter);
 		
 		return view;
 		
 	}
+	
+
+
+
 	
 
 
