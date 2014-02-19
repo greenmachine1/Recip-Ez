@@ -25,6 +25,7 @@ import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridView;
+import availableRecipes.AvailableRecipes;
 import fileManager.ParseJSON;
 
 public class GridViewFragment extends Fragment{
@@ -47,13 +48,14 @@ public class GridViewFragment extends Fragment{
 	private BroadcastReceiver myReciever;
 
 	
-	// upon creation of the fragment
+	// -- upon creation of the fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
 		newGridRecipeAdapter = new GridRecipeAdapter(getActivity(), R.layout.grid_view_item, items);
 
 		View view;
 
+		
 		
 		// -- section gets info from the PearsonAPIService and loads it into the 
 		// -- grid array when it finishes loading all the data
@@ -71,7 +73,6 @@ public class GridViewFragment extends Fragment{
 				Log.i("returned value", "" + intentThing);
 				if(intentThing == true){
 					
-					
 					ParseJSON newParseJson = new ParseJSON(context);
 					
 					imagesHashMap = newParseJson.returnImageUrl();
@@ -87,13 +88,14 @@ public class GridViewFragment extends Fragment{
 						nameOfRecipeArrayList.add(name);
 					}
 					
-					// cycling through my titles and adding them to my GridViewAdapterDefinition
-					for(int i = 0; i < imagesHashMap.size(); i++){
+					// -- cycling through my titles and adding them to my GridViewAdapterDefinition
+					// -- only delivers 4 total
+					for(int i = 0; i < imagesHashMap.size() - 6; i++){
 						
 						// -- loading the gridviewadapterdefinition with the image and title
 						GridViewAdapterDefinition item = new GridViewAdapterDefinition(urlArrayList.get(i).toString() , nameOfRecipeArrayList.get(i).toString());
 						
-						// adding the item to my items ArrayList
+						// -- adding the item to my items ArrayList
 						items.add(item);
 					}
 				}
@@ -102,14 +104,18 @@ public class GridViewFragment extends Fragment{
 			}
 			
 		};
-
+		
 		// -- setting the reciever to be registered
 		getActivity().registerReceiver(myReciever, intentFilter);
 
-		// inflating my gridview fragment
+		// -- inflating my gridview fragment
 		view = inflater.inflate(R.layout.grid_view_fragment_layout, container, false);
 		
-		// targetting the user search box
+		
+		
+		
+		
+		// -- targetting the user search box
 		userSearch = (EditText)view.findViewById(R.id.user_search_main);
 		userSearch.setOnKeyListener(new OnKeyListener(){
 
@@ -119,6 +125,11 @@ public class GridViewFragment extends Fragment{
 				if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
 					
 					String userEntered = userSearch.getText().toString();
+
+					// -- starts the available recipes intent
+					Intent availableRecipesIntent = new Intent(getActivity(), AvailableRecipes.class);
+					
+					startActivity(availableRecipesIntent);
 					
 					Log.i("user has pressed enter", userEntered);
 					
@@ -131,8 +142,8 @@ public class GridViewFragment extends Fragment{
 		GridView gridView = (GridView)view.findViewById(R.id.gridView1);
 
 			
-		// setting the gridview adapter and sending over the images
-		// context, layout for each element, then the elements themselves
+		// -- setting the gridview adapter and sending over the images
+		// -- context, layout for each element, then the elements themselves
 		gridView.setAdapter(newGridRecipeAdapter);
 		
 		return view;
