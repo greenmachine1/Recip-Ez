@@ -19,7 +19,7 @@
             android:textColor="@color/about_screen_black_text"
             android:text="Title" />
         
-        <ImageView
+        <com.loopj.android.image.SmartImageView
             android:id="@+id/main_image_detail_view"
             android:layout_width="150dp"
             android:layout_height="150dp"

@@ -11,8 +11,6 @@ package com.Cory.recip_ez;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.Cory.availableRecipes.AvailableRecipes;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +23,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.GridView;
+
+import com.Cory.availableRecipes.AvailableRecipes;
+import come.Cory.recipeDetails.RecipeDetails;
+
 import fileManager.ParseJSON;
 
 public class GridViewFragment extends Fragment{
@@ -44,11 +48,17 @@ public class GridViewFragment extends Fragment{
 	
 	public HashMap<String, String> imagesHashMap = new HashMap<String, String>();
 	
+	public HashMap<String, String> directionsHashMap = new HashMap<String, String>();
+	
 	public ArrayList<String> urlArrayList = new ArrayList<String>();
 	
 	public ArrayList<String> nameOfRecipeArrayList = new ArrayList<String>();
 	
+	public ArrayList<String> directionsArrayList = new ArrayList<String>();
+	
 	private BroadcastReceiver myReciever;
+	
+	IntentFilter intentFilter;
 
 	
 	// -- upon creation of the fragment
@@ -63,7 +73,7 @@ public class GridViewFragment extends Fragment{
 
 		// -- section gets info from the PearsonAPIService and loads it into the 
 		// -- grid array when it finishes loading all the data
-		IntentFilter intentFilter = new IntentFilter("android.intent.action.MAIN");
+		intentFilter = new IntentFilter("android.intent.action.MAIN");
 		
 		myReciever = new BroadcastReceiver(){
 
@@ -72,6 +82,7 @@ public class GridViewFragment extends Fragment{
 				// TODO Auto-generated method stub
 				
 				imagesHashMap.clear();
+				directionsHashMap.clear();
 				
 				boolean intentThing = intent.getBooleanExtra("DONE", false);
 				Log.i("returned value", "" + intentThing);
@@ -85,6 +96,7 @@ public class GridViewFragment extends Fragment{
 					ParseJSON newParseJson = new ParseJSON(context, CAME_FROM_MAIN);
 					
 					imagesHashMap = newParseJson.returnImageUrl();
+					directionsHashMap = newParseJson.returnDirectionData();
 
 					// -- putting my hashmap into an arrayList
 					for(String value:imagesHashMap.values()){
@@ -95,6 +107,12 @@ public class GridViewFragment extends Fragment{
 					// -- an array list
 					for(String name:imagesHashMap.keySet()){
 						nameOfRecipeArrayList.add(name);
+					}
+					
+					// -- putting the directions values into an array
+					// -- list
+					for(String direction: directionsHashMap.values()){
+						directionsArrayList.add(direction);
 					}
 					
 					// -- cycling through my titles and adding them to my GridViewAdapterDefinition
@@ -153,8 +171,34 @@ public class GridViewFragment extends Fragment{
 		// -- context, layout for each element, then the elements themselves
 		gridView.setAdapter(newGridRecipeAdapter);
 		
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+
+				// -- starting a new recipe details screen with passed along extras
+				Intent gridRecipeDetailsIntent = new Intent(getActivity(), RecipeDetails.class);
+				gridRecipeDetailsIntent.putExtra("title", nameOfRecipeArrayList.get(position));
+				gridRecipeDetailsIntent.putExtra("url", urlArrayList.get(position));
+				gridRecipeDetailsIntent.putExtra("directions", directionsArrayList.get(position));
+				startActivity(gridRecipeDetailsIntent);
+				
+			}
+		});
+		
 		return view;
 		
+	}
+	
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		// -- setting the reciever to be registered
+		getActivity().registerReceiver(myReciever, intentFilter);
 	}
 
 
