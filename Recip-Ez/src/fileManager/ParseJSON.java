@@ -179,9 +179,17 @@ public class ParseJSON{
 		
 		JSONArray ingredientsArray = new JSONArray();
 		
+		//JSONObject descriptionOfIngredient = new JSONObject();
+		
+		String descriptionOfIngredient = "";
+		
 		String titleOfRecipe;
 		
+		String mainOutputString = "";
+		
 		HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();
+		
+		ArrayList<String>descriptions = new ArrayList<String>();
 		
 		if(loadJSON() == true){
 			
@@ -194,19 +202,34 @@ public class ParseJSON{
 					
 					titleOfRecipe = mainJSONArray.getJSONObject(i).getJSONObject("summary").getString("title");
 					
+					descriptions.clear();
+					
+					for(int j = 0; j < ingredientsArray.length(); j++){
+						
+						String ingredientsArrayString = ingredientsArray.getJSONObject(j).getString("description");
+						descriptions.add(ingredientsArrayString);
+						
+					}
+					
+
 					// -- putting the ingredients into a hashMap
-					ingredientsHashMap.put(titleOfRecipe, ingredientsArray.toString());
+					ingredientsHashMap.put(titleOfRecipe, descriptions.toString());
+					
 					
 				} catch (JSONException e) {
 					
 					e.printStackTrace();
 				}
 			}	
+
 		}
 		// -- returning the ingredients hashmap
 		return ingredientsHashMap;
 		
 	}
+	
+	
+	
 	
 	
 	public HashMap<String, String> returnImageUrl(){
@@ -262,6 +285,8 @@ public class ParseJSON{
 		// -- returning the image hashmap
 		return imageUrlHashMap;
 	}
+	
+	
 
 
 }

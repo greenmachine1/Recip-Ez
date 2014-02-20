@@ -5,13 +5,19 @@ import org.apache.http.protocol.HTTP;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
+import com.Cory.recip_ez.About;
+import com.Cory.recip_ez.Favorites;
+import com.Cory.recip_ez.IngredientsSearch;
 import com.Cory.recip_ez.R;
 import com.loopj.android.image.SmartImageView;
+
+import fileManager.ParseJSON;
 
 public class RecipeDetails extends Activity{
 	
@@ -51,6 +57,9 @@ public class RecipeDetails extends Activity{
         
         title.setText(titleString);
         directionsContent.setText(cuttingTheFatFromDirections(directionsString));
+        ingredientsContent.setText(ingredientsString);
+        
+        Log.i("ingredients", ingredientsString);
         
         mainImage.setImageUrl(imageUrl);
         
@@ -75,6 +84,40 @@ public class RecipeDetails extends Activity{
         mShareActionProvider = (ShareActionProvider) item.getActionProvider();
         mShareActionProvider.setShareIntent(shareIntent);
         return true;
+    }
+    
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()){
+    	
+    	// what to do when the add event icon is selected 
+    	case R.id.nutrition_facts_icon:
+    		
+    		Log.i("-->", "nutrition facts selected");
+    		
+    		//Intent favoritesIntent = new Intent(this, Favorites.class);
+
+			//startActivity(favoritesIntent);
+			
+    		return true;
+    	
+
+    	// what to do when the about this app overflow is selected	
+    	case R.id.add_to_favorites_icon:
+    		
+    		Log.i("-->", "Add to favorites selected");
+    		
+    		Intent favoritesIntent = new Intent(this, Favorites.class);
+
+			startActivity(favoritesIntent);
+
+			
+    		return true;
+    		
+    		default:
+    			return super.onOptionsItemSelected(item);
+    	}
+    	
     }
     
     private void setShareIntent(Intent shareIntent){

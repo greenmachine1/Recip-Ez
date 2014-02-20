@@ -50,11 +50,15 @@ public class GridViewFragment extends Fragment{
 	
 	public HashMap<String, String> directionsHashMap = new HashMap<String, String>();
 	
+	public HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();
+	
 	public ArrayList<String> urlArrayList = new ArrayList<String>();
 	
 	public ArrayList<String> nameOfRecipeArrayList = new ArrayList<String>();
 	
 	public ArrayList<String> directionsArrayList = new ArrayList<String>();
+	
+	public ArrayList<String> ingredientsArrayList = new ArrayList<String>();
 	
 	private BroadcastReceiver myReciever;
 	
@@ -83,6 +87,7 @@ public class GridViewFragment extends Fragment{
 				
 				imagesHashMap.clear();
 				directionsHashMap.clear();
+				ingredientsHashMap.clear();
 				
 				boolean intentThing = intent.getBooleanExtra("DONE", false);
 				Log.i("returned value", "" + intentThing);
@@ -97,6 +102,7 @@ public class GridViewFragment extends Fragment{
 					
 					imagesHashMap = newParseJson.returnImageUrl();
 					directionsHashMap = newParseJson.returnDirectionData();
+					ingredientsHashMap = newParseJson.returnIngredients();
 
 					// -- putting my hashmap into an arrayList
 					for(String value:imagesHashMap.values()){
@@ -113,6 +119,10 @@ public class GridViewFragment extends Fragment{
 					// -- list
 					for(String direction: directionsHashMap.values()){
 						directionsArrayList.add(direction);
+					}
+					
+					for(String ingredient:ingredientsHashMap.values()){
+						ingredientsArrayList.add(ingredient);
 					}
 					
 					// -- cycling through my titles and adding them to my GridViewAdapterDefinition
@@ -182,6 +192,7 @@ public class GridViewFragment extends Fragment{
 				gridRecipeDetailsIntent.putExtra("title", nameOfRecipeArrayList.get(position));
 				gridRecipeDetailsIntent.putExtra("url", urlArrayList.get(position));
 				gridRecipeDetailsIntent.putExtra("directions", directionsArrayList.get(position));
+				gridRecipeDetailsIntent.putExtra("ingredients", ingredientsArrayList.get(position));
 				startActivity(gridRecipeDetailsIntent);
 				
 			}

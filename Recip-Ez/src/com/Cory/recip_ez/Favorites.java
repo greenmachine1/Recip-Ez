@@ -7,18 +7,17 @@
  */
 package com.Cory.recip_ez;
 
-import android.app.Activity;
-import android.os.Bundle;
 
-public class Favorites extends Activity{
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+
+public class Favorites extends FragmentActivity{
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favorites_layout);
 
-        
-        
     }
 	
 

@@ -31,10 +31,13 @@ public class AvailableRecipesFragment extends Fragment {
 	
 	HashMap<String, String> directionsHashMap = new HashMap<String, String>();
 	HashMap<String, String> urlHashMap = new HashMap<String, String>();
+	HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();
+	
 	
 	public ArrayList<String> nameOfRecipeArrayList = new ArrayList<String>();
 	public ArrayList<String> directionsOfRecipeArrayList = new ArrayList<String>();
 	public ArrayList<String> imageUrlsOfRecipeArrayList = new ArrayList<String>();
+	public ArrayList<String> ingredientsArrayList = new ArrayList<String>();
 	
 	ArrayAdapter<String> adapter;
 	
@@ -62,6 +65,7 @@ public class AvailableRecipesFragment extends Fragment {
 		
 		nameOfRecipeArrayList.clear();
 		directionsOfRecipeArrayList.clear();
+		ingredientsArrayList.clear();
 		
 		myReciever = new BroadcastReceiver(){
 
@@ -80,6 +84,7 @@ public class AvailableRecipesFragment extends Fragment {
 					ParseJSON newParseJSON = new ParseJSON(context, CAME_FROM_MAIN);
 					urlHashMap = newParseJSON.returnImageUrl();
 					directionsHashMap = newParseJSON.returnDirectionData();
+					ingredientsHashMap = newParseJSON.returnIngredients();
 					
 					// -- cycling through my directions hashmap 
 					// -- and picking out only the names of the 
@@ -95,6 +100,10 @@ public class AvailableRecipesFragment extends Fragment {
 					
 					for(String urlString:urlHashMap.values()){
 						imageUrlsOfRecipeArrayList.add(BEGINNING_OF_URL + urlString);
+					}
+					
+					for(String ingredient:ingredientsHashMap.values()){
+						ingredientsArrayList.add(ingredient);
 					}
 					
 					// -- setting the contents of the array adapter
@@ -125,6 +134,7 @@ public class AvailableRecipesFragment extends Fragment {
 				recipeDetailsIntent.putExtra("title", nameOfRecipeArrayList.get(position));
 				recipeDetailsIntent.putExtra("directions", directionsOfRecipeArrayList.get(position));
 				recipeDetailsIntent.putExtra("url", imageUrlsOfRecipeArrayList.get(position));
+				recipeDetailsIntent.putExtra("ingredients", ingredientsArrayList.get(position));
 				startActivity(recipeDetailsIntent);
 			}
 		});
