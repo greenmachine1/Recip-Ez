@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item
+        android:id="@+id/nutrition_facts_icon"
+        android:title="Nutrition"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_ingredients"/>
+    <item
+        android:id="@+id/share_icon"
+        android:title="Share"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:icon="@drawable/ic_share"/>
+    <item
+        android:id="@+id/add_to_favorites_icon"
+        android:title="Favorites"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_favorites_not_solid"/>
+
+</menu>

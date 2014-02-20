@@ -27,10 +27,14 @@ public class AvailableRecipesFragment extends Fragment {
 	
 	public final boolean CAME_FROM_MAIN = false;
 	
+	public final String BEGINNING_OF_URL = "https://api.pearson.com";
+	
 	HashMap<String, String> directionsHashMap = new HashMap<String, String>();
+	HashMap<String, String> urlHashMap = new HashMap<String, String>();
 	
 	public ArrayList<String> nameOfRecipeArrayList = new ArrayList<String>();
 	public ArrayList<String> directionsOfRecipeArrayList = new ArrayList<String>();
+	public ArrayList<String> imageUrlsOfRecipeArrayList = new ArrayList<String>();
 	
 	ArrayAdapter<String> adapter;
 	
@@ -69,13 +73,12 @@ public class AvailableRecipesFragment extends Fragment {
 				boolean intentThing = intent.getBooleanExtra("DONE", false);
 				Log.i("returned value", "boolean " + intentThing);
 				if(intentThing == true){
-					
-					nameOfRecipeArrayList.clear();
 		
 					// -- starting the parseJSON class which takes in the context
 					// -- then chooses which file to use, in this case, its the 
 					// -- search file
 					ParseJSON newParseJSON = new ParseJSON(context, CAME_FROM_MAIN);
+					urlHashMap = newParseJSON.returnImageUrl();
 					directionsHashMap = newParseJSON.returnDirectionData();
 					
 					// -- cycling through my directions hashmap 
@@ -88,6 +91,10 @@ public class AvailableRecipesFragment extends Fragment {
 					// -- doing the same for the actual directions
 					for(String name:directionsHashMap.values()){
 						directionsOfRecipeArrayList.add(name);
+					}
+					
+					for(String urlString:urlHashMap.values()){
+						imageUrlsOfRecipeArrayList.add(BEGINNING_OF_URL + urlString);
 					}
 					
 					// -- setting the contents of the array adapter
@@ -117,6 +124,7 @@ public class AvailableRecipesFragment extends Fragment {
 				// -- putting values into the intents extras
 				recipeDetailsIntent.putExtra("title", nameOfRecipeArrayList.get(position));
 				recipeDetailsIntent.putExtra("directions", directionsOfRecipeArrayList.get(position));
+				recipeDetailsIntent.putExtra("url", imageUrlsOfRecipeArrayList.get(position));
 				startActivity(recipeDetailsIntent);
 			}
 		});

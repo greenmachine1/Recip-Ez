@@ -1,8 +1,13 @@
 package come.Cory.recipeDetails;
 
+import org.apache.http.protocol.HTTP;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.Cory.recip_ez.R;
@@ -19,6 +24,9 @@ public class RecipeDetails extends Activity{
 	String ingredientsString;
 	String directionsString;
 	String imageUrl;
+	
+	private ShareActionProvider mShareActionProvider;
+
 
 	
     @Override
@@ -42,7 +50,7 @@ public class RecipeDetails extends Activity{
         mainImage = (SmartImageView)findViewById(R.id.main_image_detail_view);
         
         title.setText(titleString);
-        cuttingTheFatFromDirections(directionsString);
+        directionsContent.setText(cuttingTheFatFromDirections(directionsString));
         
         mainImage.setImageUrl(imageUrl);
         
@@ -50,11 +58,36 @@ public class RecipeDetails extends Activity{
         
     }
     
+    // my action bar inflater method
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.details_menu, menu);
+        
+        MenuItem item = menu.findItem(R.id.share_icon);
+        
+        // -- this sets up my share intent
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, titleString);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, cuttingTheFatFromDirections(directionsString));
+        shareIntent.setType(HTTP.PLAIN_TEXT_TYPE);
+        
+        mShareActionProvider = (ShareActionProvider) item.getActionProvider();
+        mShareActionProvider.setShareIntent(shareIntent);
+        return true;
+    }
+    
+    private void setShareIntent(Intent shareIntent){
+    	if(mShareActionProvider != null){
+    		mShareActionProvider.setShareIntent(shareIntent);
+    	}
+    }
+    
     
     // -- here I need to go through the directions and 
     // -- get rid of the [] at the beginning and end
     // -- and also get rid of "" throughout
-    public void cuttingTheFatFromDirections(String passedInDirections){
+    public String cuttingTheFatFromDirections(String passedInDirections){
     	
     	String tempString = passedInDirections;
     	
@@ -65,6 +98,7 @@ public class RecipeDetails extends Activity{
     	
     	String finalStringToBeDisplayed = newStringMinusFrontAndRearQuotes.replace(".,", ". ");
     	
-    	directionsContent.setText(finalStringToBeDisplayed);
+    	return finalStringToBeDisplayed;
+    	
     }
 }
