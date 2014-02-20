@@ -23,6 +23,10 @@ public class PearsonAPIService extends IntentService {
 	
 	String completeURL = "";
 	
+	String extraString;
+	
+	String extraOffsetnumber;
+	
 	
 	public PearsonAPIService() {
 		super("PearsonAPIService");
@@ -33,22 +37,22 @@ public class PearsonAPIService extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 		
 		// -- will be needing to get extras from the calling intent
-		String extraString = intent.getStringExtra("search");
-		String extraOffsetnumber = "" + intent.getIntExtra("offset", 0);
+		extraString = intent.getStringExtra("search");
+		extraOffsetnumber = "" + intent.getIntExtra("offset", 0);
 		boolean cameFromMainActivity = intent.getBooleanExtra("fromMainActivity", true);
 		
 		// -- judging where the service call came form
 		// -- this came from the search function
-		if(cameFromMainActivity == false){
+		if(cameFromMainActivity == true){
 			
-			Log.i("did not come from main activity", "false");
+			Log.i("did come from main activity", "true");
 			
-			cameFromMainActivityJSONParse(extraString);
+			cameFromMainActivityJSONParse(extraOffsetnumber);
 		
 		// -- this came from the main activity
 		}else{
 			
-			Log.i("did come from main activity", "true");
+			Log.i("did not come from main activity", "false");
 			
 			cameFromSearchActivityJSONParse(extraOffsetnumber, extraString);
 		}
@@ -99,9 +103,9 @@ public class PearsonAPIService extends IntentService {
 	
 	// -- this gets ran if it came from the search 'return'
 	// -- button (passes in the search)
-	public void cameFromSearchActivityJSONParse(String offSet ,String search){
+	public void cameFromSearchActivityJSONParse(String offSet , String searchSting){
 		
-		completeURL = "https://api.pearson.com/v2/foodanddrink/recipes?offset=" + offSet + "&search=" + search + "&apikey=zTTymSsKBxBB59T9AoBBnyMgZ1VUW4AB";
+		completeURL = "https://api.pearson.com/v2/foodanddrink/recipes?offset=" + offSet + "&search=" + searchSting + "&apikey=zTTymSsKBxBB59T9AoBBnyMgZ1VUW4AB";
 		
 		URL finalURL = null;
 		try {

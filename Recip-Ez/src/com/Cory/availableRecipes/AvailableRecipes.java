@@ -29,7 +29,7 @@ public class AvailableRecipes extends FragmentActivity{
         Intent serviceIntent = new Intent(this, PearsonAPIService.class);
         
         // -- this will be the extras that the user passes in via search 
-        serviceIntent.putExtra("search", "");
+        serviceIntent.putExtra("search", userPassedInSearch);
         
         // -- this tells the service that the searching service
         // -- was called by the main activity and not

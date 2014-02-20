@@ -24,7 +24,8 @@ import android.util.Log;
 public class ParseJSON{
 
 
-	public final String FILENAME = "pearsonJSON.txt";
+	public final String FILENAME_FOR_PEARSON = "pearsonJSON.txt";
+	public final String FILENAME_FOR_SEARCH = "searchJSON.txt";
 	
 	FileManager fileManager;
 
@@ -38,9 +39,15 @@ public class ParseJSON{
 	
 	JSONArray mainJSONArray;
 	
-	// -- constructor -- passes in the context
-	public ParseJSON(Context context) {
+	boolean whereItCameFrom;
+	
+	// -- constructor -- passes in the context, and also where it 
+	// -- came from.  If it came from main activity it will be 
+	// -- true.  If it came from the search from gridview fragment
+	// -- it will be false
+	public ParseJSON(Context context, boolean fromMainActivity) {
 		_context = context;
+		whereItCameFrom = fromMainActivity;
 	}
 	
 	
@@ -50,7 +57,12 @@ public class ParseJSON{
 	public boolean fileDoesExist(){
 		
 		// -- checking to see if the file exists
-		file = _context.getFileStreamPath(FILENAME);
+		if(whereItCameFrom == true){
+			file = _context.getFileStreamPath(FILENAME_FOR_PEARSON);
+		}else{
+			file = _context.getFileStreamPath(FILENAME_FOR_SEARCH);
+		}
+		
 		if(file.exists() == true){	
 			return true;
 		}else{
@@ -70,7 +82,12 @@ public class ParseJSON{
 			
 			// -- getting the json file and put it into a string
 			fileManager = new FileManager();
-			mainJSONString = fileManager.readNewFile(_context, FILENAME);
+			
+			if(whereItCameFrom == true){
+				mainJSONString = fileManager.readNewFile(_context, FILENAME_FOR_PEARSON);
+			}else{
+				mainJSONString = fileManager.readNewFile(_context, FILENAME_FOR_SEARCH);
+			}
 			
 			try {
 				// -- contains the JSON returned object for the rest

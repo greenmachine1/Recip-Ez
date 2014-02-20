@@ -36,6 +36,8 @@ public class GridViewFragment extends Fragment{
 	GridRecipeAdapter newGridRecipeAdapter;
 	
 	public final String BEGINNING_OF_URL = "https://api.pearson.com";
+	
+	public final boolean CAME_FROM_MAIN = true;
 
 	// my items arrayList
 	public ArrayList<GridViewAdapterDefinition> items = new ArrayList<GridViewAdapterDefinition>();
@@ -75,7 +77,12 @@ public class GridViewFragment extends Fragment{
 				Log.i("returned value", "" + intentThing);
 				if(intentThing == true){
 					
-					ParseJSON newParseJson = new ParseJSON(context);
+					// -- start of the parseJSON class
+					// -- passes in the context and also where it is calling form
+					// -- this decides which file to parse from
+					// -- if its the main gridview file or
+					// -- the main search file 
+					ParseJSON newParseJson = new ParseJSON(context, CAME_FROM_MAIN);
 					
 					imagesHashMap = newParseJson.returnImageUrl();
 
@@ -110,9 +117,6 @@ public class GridViewFragment extends Fragment{
 		// -- setting the reciever to be registered
 		getActivity().registerReceiver(myReciever, intentFilter);
 
-
-		
-		
 		
 		
 		// -- targetting the user search box
@@ -151,6 +155,16 @@ public class GridViewFragment extends Fragment{
 		
 		return view;
 		
+	}
+
+
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+
+		// -- unregistering the reciever
+		getActivity().unregisterReceiver(myReciever);
 	}
 	
 
