@@ -55,6 +55,16 @@ public class RecipeDetails extends Activity{
     // -- get rid of the [] at the beginning and end
     // -- and also get rid of "" throughout
     public void cuttingTheFatFromDirections(String passedInDirections){
-    	directionsContent.setText(passedInDirections);
+    	
+    	String tempString = passedInDirections;
+    	
+    	String newStringMinusFrontBracket = tempString.replace("[", "");
+    	String newStringMinusBothBrackets = newStringMinusFrontBracket.replace("]", "");
+    	
+    	String newStringMinusFrontAndRearQuotes = newStringMinusBothBrackets.replace("\"", "");
+    	
+    	String finalStringToBeDisplayed = newStringMinusFrontAndRearQuotes.replace(".,", ". ");
+    	
+    	directionsContent.setText(finalStringToBeDisplayed);
     }
 }
