@@ -17,13 +17,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-/*
- * -- this is where the parsing of the returned json data takes place
- */
 
+// -- parsing of the main json Data takes place here
 public class ParseJSON{
 
-
+	// -- declaring file names
 	public final String FILENAME_FOR_PEARSON = "pearsonJSON.txt";
 	public final String FILENAME_FOR_SEARCH = "searchJSON.txt";
 	

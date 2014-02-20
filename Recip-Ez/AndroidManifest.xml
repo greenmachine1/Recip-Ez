@@ -42,6 +42,8 @@
         <activity android:name="com.Cory.availableRecipes.AvailableRecipes"
             android:label="Available Recipes"
             android:parentActivityName="com.Cory.recip_ez.MainActivity"></activity>
+        <activity android:name="come.Cory.recipeDetails.RecipeDetails"
+            android:label="Recipe Details"></activity>
     </application>
 
 </manifest>
