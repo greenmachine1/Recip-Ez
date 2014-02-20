@@ -11,6 +11,8 @@ package com.Cory.recip_ez;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.Cory.availableRecipes.AvailableRecipes;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +27,6 @@ import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridView;
-import availableRecipes.AvailableRecipes;
 import fileManager.ParseJSON;
 
 public class GridViewFragment extends Fragment{

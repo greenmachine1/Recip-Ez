@@ -34,16 +34,17 @@ public class MainActivity extends FragmentActivity {
         // -- this will be the extras that the user passes in via search 
         serviceIntent.putExtra("search", "");
         
+        // -- this tells the service that the searching service
+        // -- was called by the main activity and not
+        // -- the search function
+        serviceIntent.putExtra("fromMainActivity", true);
+        
         // -- this is the random offset that will be generated
         // -- to give a random recipe
-        serviceIntent.putExtra("offset", 30);
+        serviceIntent.putExtra("offset", 0);
         
         startService(serviceIntent);
-
-        
-        
-
-        
+  
     }
 
 

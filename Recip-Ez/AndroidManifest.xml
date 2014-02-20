@@ -39,7 +39,7 @@
             android:parentActivityName="com.Cory.recip_ez.MainActivity">
         </activity>
         <service android:name="com.Cory.service_package.PearsonAPIService"></service>
-        <activity android:name="availableRecipes.AvailableRecipes"
+        <activity android:name="com.Cory.availableRecipes.AvailableRecipes"
             android:label="Available Recipes"
             android:parentActivityName="com.Cory.recip_ez.MainActivity"></activity>
     </application>
