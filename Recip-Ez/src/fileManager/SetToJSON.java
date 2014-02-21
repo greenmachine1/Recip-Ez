@@ -68,8 +68,7 @@ public class SetToJSON {
 			
 			topLevelObject.put("main", topLevelArray);
 			
-			
-			
+
 			// -- if the file does not exist, make it
 			if(!(file.exists()) == true){
 				

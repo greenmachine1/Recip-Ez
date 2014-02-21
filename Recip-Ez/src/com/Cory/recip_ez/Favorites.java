@@ -42,8 +42,6 @@ public class Favorites extends FragmentActivity{
         	SetToJSON newSetToJSON = new SetToJSON(getApplication());
         	newSetToJSON.setEverythingToJSON(title, imageUrl, directions, ingredients);
 
-        	
-        	//  -- save the extras to the favorites file
         }
         
 
