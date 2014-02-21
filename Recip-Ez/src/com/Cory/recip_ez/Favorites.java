@@ -17,6 +17,14 @@ public class Favorites extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favorites_layout);
+        
+        Bundle extrasBundle = getIntent().getExtras();
+        
+        String title = extrasBundle.getString("title");
+        String imageUrl = extrasBundle.getString("url");
+        String directions = extrasBundle.getString("directions");
+        String ingredients = extrasBundle.getString("ingredients");
+        
 
     }
 	

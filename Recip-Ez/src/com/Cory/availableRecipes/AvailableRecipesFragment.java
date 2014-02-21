@@ -106,8 +106,6 @@ public class AvailableRecipesFragment extends Fragment {
 						ingredientsArrayList.add(ingredient);
 					}
 					
-					// -- setting the contents of the array adapter
-					//adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, nameOfRecipeArrayList);
 				}
 				adapter.notifyDataSetChanged();
 			}

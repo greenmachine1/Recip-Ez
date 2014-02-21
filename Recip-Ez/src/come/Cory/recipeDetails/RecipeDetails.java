@@ -56,8 +56,11 @@ public class RecipeDetails extends Activity{
         mainImage = (SmartImageView)findViewById(R.id.main_image_detail_view);
         
         title.setText(titleString);
+        
+        // -- trimming off pieces of the directions and ingredients
+        // -- then setting them to the view
         directionsContent.setText(cuttingTheFatFromDirections(directionsString));
-        ingredientsContent.setText(ingredientsString);
+        ingredientsContent.setText(cuttingTheFatFromIngredients(ingredientsString));
         
         Log.i("ingredients", ingredientsString);
         
@@ -107,7 +110,15 @@ public class RecipeDetails extends Activity{
     		
     		Log.i("-->", "Add to favorites selected");
     		
+    		// -- start of my favorites intent
+    		// -- passing in pretty much everything about this ingredient
     		Intent favoritesIntent = new Intent(this, Favorites.class);
+    		
+    		favoritesIntent.putExtra("name", titleString);
+    		favoritesIntent.putExtra("url", imageUrl);
+    		favoritesIntent.putExtra("ingredients", ingredientsString);
+    		favoritesIntent.putExtra("directions", directionsString);
+    		
 
 			startActivity(favoritesIntent);
 
@@ -142,6 +153,23 @@ public class RecipeDetails extends Activity{
     	String finalStringToBeDisplayed = newStringMinusFrontAndRearQuotes.replace(".,", ". ");
     	
     	return finalStringToBeDisplayed;
+    	
+    }
+    
+    // -- method used to cut the [] and add new lines where needed
+    public String cuttingTheFatFromIngredients(String passedInIngredients){
+    	
+    	String tempString = passedInIngredients;
+    	
+    	String newStringMinusFrontBracket = tempString.replace("[", "");
+    	
+    	String newStringMinusBothBrackets = newStringMinusFrontBracket.replace("]", "");
+    	
+    	String newStringWithNewLine = newStringMinusBothBrackets.replace(",", "\n");
+    	
+    	
+    	return newStringWithNewLine;
+    	
     	
     }
 }
