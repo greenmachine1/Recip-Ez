@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import fileManager.FavoritesJSONParsing;
 
 public class FavoritesListFragment extends Fragment {
 	
-	FavoritesJSONParsing newFavoritesParsing;
+	
 	
 	ArrayList<String> nameArrayList = new ArrayList<String>();
 	
@@ -33,14 +34,19 @@ public class FavoritesListFragment extends Fragment {
 		view = inflater.inflate(R.layout.favorites_fragment, container, false);
 		
 		listView = (ListView)view.findViewById(R.id.favorites_list_view);
+		
+		nameHashMap.clear();
+		nameArrayList.clear();
 
-		newFavoritesParsing = new FavoritesJSONParsing(getActivity());
+		FavoritesJSONParsing newFavoritesParsing = new FavoritesJSONParsing(getActivity());
 		
 		nameHashMap = newFavoritesParsing.returnName();
 		
 		// -- putting the contents of my hashmap into an array list
 		for(String name:nameHashMap.values()){
 			nameArrayList.add(name);
+			
+			Log.i("amount", "" + nameArrayList.size());
 		}
 		
 		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, nameArrayList);
@@ -54,6 +60,13 @@ public class FavoritesListFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		
+		nameHashMap.clear();
+		nameArrayList.clear();
+
+		FavoritesJSONParsing newFavoritesParsing = new FavoritesJSONParsing(getActivity());
+		
+		nameHashMap = newFavoritesParsing.returnName();
 		
 		// -- putting the contents of my hashmap into an array list
 		for(String name:nameHashMap.values()){

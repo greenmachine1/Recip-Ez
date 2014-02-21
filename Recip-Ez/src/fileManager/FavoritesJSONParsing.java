@@ -22,7 +22,7 @@ public class FavoritesJSONParsing {
 	
 	JSONObject mainObject;
 	
-	HashMap<String, String> nameHashMap = new HashMap<String, String>();
+	
 	
 	public FavoritesJSONParsing(Context context) {
 		_context = context;
@@ -60,6 +60,7 @@ public class FavoritesJSONParsing {
 	// -- the main json data
 	public HashMap<String, String> returnName(){
 		
+		HashMap<String, String> nameHashMap = new HashMap<String, String>();
 
 		if(loadJSON() == true){
 			
@@ -76,19 +77,26 @@ public class FavoritesJSONParsing {
 					
 					String nameString = cropString(mainJSONArray.getJSONObject(i).names().toString());
 					
+					Log.i("name", nameString);
+					
 					nameHashMap.put(nameString, nameString);
 					
-					Log.i("number of elements", "" + nameHashMap.size());
+					
 				}
+				Log.i("hash map hash map", nameHashMap.toString());
 				
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Log.e("error", e.getMessage().toString());
 			}
 			
+			Log.i("contents of hashmap", nameHashMap.toString());
+			return nameHashMap;
 		}
-		return nameHashMap;
+		
+		Log.i("contents of hashmap", nameHashMap.toString());
+		return null;
 	}
 	
 	

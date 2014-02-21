@@ -39,7 +39,7 @@ public class Favorites extends FragmentActivity{
         }else if(cameFromMainActivity == false){
         	
         	// -- start of the new JSON file creation
-        	SetToJSON newSetToJSON = new SetToJSON(getApplication());
+        	SetToJSON newSetToJSON = new SetToJSON(this);
         	newSetToJSON.setEverythingToJSON(title, imageUrl, directions, ingredients);
 
         }
