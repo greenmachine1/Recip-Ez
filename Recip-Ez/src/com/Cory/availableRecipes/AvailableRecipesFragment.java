@@ -62,7 +62,6 @@ public class AvailableRecipesFragment extends Fragment {
 		intentFilter = new IntentFilter("android.intent.action.MAIN");
 		
 
-		
 		nameOfRecipeArrayList.clear();
 		directionsOfRecipeArrayList.clear();
 		ingredientsArrayList.clear();
@@ -133,6 +132,9 @@ public class AvailableRecipesFragment extends Fragment {
 				recipeDetailsIntent.putExtra("directions", directionsOfRecipeArrayList.get(position));
 				recipeDetailsIntent.putExtra("url", imageUrlsOfRecipeArrayList.get(position));
 				recipeDetailsIntent.putExtra("ingredients", ingredientsArrayList.get(position));
+				recipeDetailsIntent.putExtra("comingFromFavorites", false);
+				
+				// comingFromFavorites = extras.getBoolean("comingFromFavorites");
 				startActivity(recipeDetailsIntent);
 			}
 		});

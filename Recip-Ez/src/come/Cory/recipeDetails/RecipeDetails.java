@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
@@ -31,7 +33,11 @@ public class RecipeDetails extends Activity{
 	String directionsString;
 	String imageUrl;
 	
+	boolean comingFromFavorites = false;
+	
 	private ShareActionProvider mShareActionProvider;
+	
+	ActionMode mActionMode;
 
 
 	
@@ -47,6 +53,15 @@ public class RecipeDetails extends Activity{
         ingredientsString = extras.getString("ingredients");
         directionsString = extras.getString("directions");
         imageUrl = extras.getString("url");
+        comingFromFavorites = extras.getBoolean("comingFromFavorites");
+        
+        // -- telling the activity that if its coming
+        // -- from the favorites activity
+        // -- to set the action bar a certian way
+        if(comingFromFavorites == true){
+        	mActionMode = this.startActionMode(mActionModeCallBack);
+        }
+        
         
         
         title = (TextView)findViewById(R.id.title_details_view);
@@ -58,10 +73,11 @@ public class RecipeDetails extends Activity{
         
         // -- trimming off pieces of the directions and ingredients
         // -- then setting them to the view
+        
         directionsContent.setText(cuttingTheFatFromDirections(directionsString));
         ingredientsContent.setText(cuttingTheFatFromIngredients(ingredientsString));
         
-        Log.i("ingredients", ingredientsString);
+        //Log.i("ingredients", ingredientsString);
         
         mainImage.setImageUrl(imageUrl);
         
@@ -80,7 +96,7 @@ public class RecipeDetails extends Activity{
         // -- this sets up my share intent
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, titleString);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, cuttingTheFatFromDirections(directionsString));
+        // -- shareIntent.putExtra(Intent.EXTRA_TEXT, cuttingTheFatFromDirections(directionsString));
         shareIntent.setType(HTTP.PLAIN_TEXT_TYPE);
         
         mShareActionProvider = (ShareActionProvider) item.getActionProvider();
@@ -135,6 +151,43 @@ public class RecipeDetails extends Activity{
     		mShareActionProvider.setShareIntent(shareIntent);
     	}
     }
+    
+    
+	// -- contextual action bar
+	private ActionMode.Callback mActionModeCallBack = new ActionMode.Callback() {
+		
+		@Override
+		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		
+		@Override
+		public void onDestroyActionMode(ActionMode mode) {
+			// TODO Auto-generated method stub
+			mActionMode = null;
+		}
+		
+		// -- inflates the contextual action bar
+		@Override
+		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+			// TODO Auto-generated method stub
+			
+			MenuInflater inflater = mode.getMenuInflater();
+			inflater.inflate(R.menu.favorites_contextual_action_bar, menu);
+			return true;
+		}
+		
+		@Override
+		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+	};
+    
+    
+    
+    
     
     
     // -- here I need to go through the directions and 

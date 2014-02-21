@@ -102,6 +102,10 @@ public class SetToJSON {
 		
 	}
 	
+	public void deleteJSON(String itemToDelete){
+		
+	}
+	
 	
 	
 	
