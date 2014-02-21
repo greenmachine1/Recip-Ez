@@ -11,8 +11,12 @@ public class FavoritesListFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		return super.onCreateView(inflater, container, savedInstanceState);
+		
+		View view;
+		
+		view = inflater.inflate(R.layout.favorites_fragment, container, false);
+		
+		return view; 
 	}
 
 	

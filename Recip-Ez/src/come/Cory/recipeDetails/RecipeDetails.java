@@ -39,8 +39,7 @@ public class RecipeDetails extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_details);
-        
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
+
         
         // -- getting some extras that are passed in
         Bundle extras = getIntent().getExtras();
@@ -114,7 +113,7 @@ public class RecipeDetails extends Activity{
     		// -- passing in pretty much everything about this ingredient
     		Intent favoritesIntent = new Intent(this, Favorites.class);
     		
-    		favoritesIntent.putExtra("name", titleString);
+    		favoritesIntent.putExtra("title", titleString);
     		favoritesIntent.putExtra("url", imageUrl);
     		favoritesIntent.putExtra("ingredients", ingredientsString);
     		favoritesIntent.putExtra("directions", directionsString);

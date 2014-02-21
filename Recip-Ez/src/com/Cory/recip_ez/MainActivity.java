@@ -71,6 +71,9 @@ public class MainActivity extends FragmentActivity {
     		Log.i("-->", "favorites selected");
     		
     		Intent favoritesIntent = new Intent(this, Favorites.class);
+    		// -- signifies that the favorite intent was called
+    		// -- from the main activity
+    		favoritesIntent.putExtra("fromMain", true);
 
 			startActivity(favoritesIntent);
 			

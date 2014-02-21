@@ -8,8 +8,10 @@
 package com.Cory.recip_ez;
 
 
+import fileManager.SetToJSON;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 public class Favorites extends FragmentActivity{
 	
@@ -24,6 +26,25 @@ public class Favorites extends FragmentActivity{
         String imageUrl = extrasBundle.getString("url");
         String directions = extrasBundle.getString("directions");
         String ingredients = extrasBundle.getString("ingredients");
+        boolean cameFromMainActivity = extrasBundle.getBoolean("fromMain");
+        
+        // -- signifies that the calling activity
+        // -- was the main activity
+        if(cameFromMainActivity == true){
+        	
+        	// -- basically do nothing
+        	
+        // -- signifies that the calling activity
+        // -- was the recipe details screen
+        }else if(cameFromMainActivity == false){
+        	
+        	// -- start of the new JSON file creation
+        	SetToJSON newSetToJSON = new SetToJSON(getApplication());
+        	newSetToJSON.setEverythingToJSON(title, imageUrl, directions, ingredients);
+
+        	
+        	//  -- save the extras to the favorites file
+        }
         
 
     }
