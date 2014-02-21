@@ -1,5 +1,8 @@
 package fileManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 
 
@@ -14,6 +17,27 @@ public class SetToJSON {
 	public SetToJSON(Context context) {
 		_context = context;
 	}
+	
+	
+	// -- taking in all the information and converting it to JSON
+	// -- format
+	public void setEverythingToJSON(String title, String url, String directions, String ingredients){
+		
+		JSONObject mainObject = new JSONObject();
+		
+		try {
+			
+			// -- starting on working on building the JSON format
+			mainObject.put("name", title);
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	
 	
 	
