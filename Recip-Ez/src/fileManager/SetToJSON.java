@@ -138,7 +138,6 @@ public class SetToJSON {
 				
 				for(int i = 0; i < mainJSONArray.length(); i++){
 					
-					
 					newJSONObject = mainJSONArray.getJSONObject(i);
 					
 					Log.i("objecttssfsfs", newJSONObject.toString());

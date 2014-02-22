@@ -7,6 +7,6 @@
         android:title="Favorites"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:icon="@drawable/ic_favorites_not_solid"/>
+        android:icon="@drawable/ic_action_discard"/>
     
 </menu>
