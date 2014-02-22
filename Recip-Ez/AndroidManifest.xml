@@ -48,6 +48,7 @@
             android:label="Recipe Details"></activity>
         <activity android:name="com.Cory.nutritionFacts.NutritionFacts"
             android:label="Nutrition Facts"></activity>
+        <service android:name="com.Cory.service_package.EdamamService"></service>
     </application>
 
 </manifest>

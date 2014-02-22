@@ -116,6 +116,7 @@ public class RecipeDetails extends Activity{
     		Log.i("-->", "nutrition facts selected");
     		
     		Intent nutritionFacts = new Intent(this, NutritionFacts.class);
+    		nutritionFacts.putExtra("ingredients", ingredientsString);
 
 			startActivity(nutritionFacts);
 			
