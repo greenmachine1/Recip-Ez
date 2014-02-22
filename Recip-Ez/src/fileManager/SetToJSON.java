@@ -115,9 +115,10 @@ public class SetToJSON {
 		
 		file = _context.getFileStreamPath(NAME_OF_FILE);
 		
-	
+		ArrayList<String> nameOfRecipe = new ArrayList<String>();
 		
 		Log.i("passed in name", itemToDelete);
+		
 		if(file.exists() == true){
 			newFileManager = new FileManager();
 			
@@ -132,17 +133,18 @@ public class SetToJSON {
 				// -- targetting the 'main' array
 				JSONArray mainJSONArray = mainObject.getJSONArray("main");
 				
-				JSONObject newJSONObject = new JSONObject();
+				String newJSONRecipeString;
 				
 				Log.i("number of elements", "" + mainJSONArray.length());
 				
 				for(int i = 0; i < mainJSONArray.length(); i++){
 					
-					newJSONObject = mainJSONArray.getJSONObject(i);
+					newJSONRecipeString = mainJSONArray.getJSONObject(i).names().toString();
 					
-					Log.i("objecttssfsfs", newJSONObject.toString());
-					
+					nameOfRecipe.add(newJSONRecipeString);
 				}
+				
+				Log.i("recipesssss", nameOfRecipe.toString());
 	
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -151,6 +153,15 @@ public class SetToJSON {
 			
 		}
 
+	}
+	
+	
+	public String cutTheFatFromNamesList(String name){
+		
+		String withoutFrontBracketAndQuote = name.replace("[\"", "");
+		String withoutBothBracketsAndQuotes = withoutFrontBracketAndQuote.replace("\"]", "");
+		
+		return withoutBothBracketsAndQuotes;
 	}
 	
 	
