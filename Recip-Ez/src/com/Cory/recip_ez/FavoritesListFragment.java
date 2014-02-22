@@ -32,16 +32,11 @@ public class FavoritesListFragment extends Fragment {
 	HashMap<String, String> urlHashMap = new HashMap<String, String>();
 	HashMap<String, String> directionsHashMap = new HashMap<String, String>();
 	HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();
-	
 
-	
 	ListView listView;
 	
 	ArrayAdapter<String> adapter;
 	
-	
-	
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -53,7 +48,13 @@ public class FavoritesListFragment extends Fragment {
 		listView = (ListView)view.findViewById(R.id.favorites_list_view);
 		
 		nameHashMap.clear();
+		urlHashMap.clear();
+		directionsHashMap.clear();
+		ingredientsHashMap.clear();
 		nameArrayList.clear();
+		urlArrayList.clear();
+		directionsArrayList.clear();
+		ingredientsArrayList.clear();
 
 		FavoritesJSONParsing newFavoritesParsing = new FavoritesJSONParsing(getActivity());
 		
@@ -126,11 +127,14 @@ public class FavoritesListFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		
-
-		
 		nameHashMap.clear();
+		urlHashMap.clear();
+		directionsHashMap.clear();
+		ingredientsHashMap.clear();
 		nameArrayList.clear();
 		urlArrayList.clear();
+		directionsArrayList.clear();
+		ingredientsArrayList.clear();
 
 		FavoritesJSONParsing newFavoritesParsing = new FavoritesJSONParsing(getActivity());
 		
@@ -138,14 +142,28 @@ public class FavoritesListFragment extends Fragment {
 		
 		urlHashMap = newFavoritesParsing.returnUrl();
 		
-		// -- putting the contents of my hashmap into an array list
+		ingredientsHashMap = newFavoritesParsing.returnIngredients();
+		
+		directionsHashMap = newFavoritesParsing.returnDirections();
+		
+		// -- putting the contents into the nameArrayList
 		for(String name:nameHashMap.values()){
 			nameArrayList.add(name);
 		}
 		
-		// -- putting the contents of my hashmap into an array list
+		// -- putting the contents into the urlArrayList
 		for(String urlValue:urlHashMap.values()){
 			urlArrayList.add(urlValue);
+		}
+		
+		// -- putting the contents into the ingredientsArrayList
+		for(String ingredientsValue:ingredientsHashMap.values()){
+			ingredientsArrayList.add(ingredientsValue);
+		}
+		
+		// -- putting the contents into the directionsArrayList
+		for(String directionsValue:directionsHashMap.values()){
+			directionsArrayList.add(directionsValue);
 		}
 		
 		adapter.notifyDataSetChanged();

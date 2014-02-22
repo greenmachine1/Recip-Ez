@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
+import com.Cory.nutritionFacts.NutritionFacts;
 import com.Cory.recip_ez.About;
 import com.Cory.recip_ez.Favorites;
 import com.Cory.recip_ez.IngredientsSearch;
@@ -20,6 +21,7 @@ import com.Cory.recip_ez.R;
 import com.loopj.android.image.SmartImageView;
 
 import fileManager.ParseJSON;
+import fileManager.SetToJSON;
 
 public class RecipeDetails extends Activity{
 	
@@ -96,7 +98,7 @@ public class RecipeDetails extends Activity{
         // -- this sets up my share intent
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, titleString);
-        // -- shareIntent.putExtra(Intent.EXTRA_TEXT, cuttingTheFatFromDirections(directionsString));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, cuttingTheFatFromDirections(directionsString));
         shareIntent.setType(HTTP.PLAIN_TEXT_TYPE);
         
         mShareActionProvider = (ShareActionProvider) item.getActionProvider();
@@ -113,9 +115,9 @@ public class RecipeDetails extends Activity{
     		
     		Log.i("-->", "nutrition facts selected");
     		
-    		//Intent favoritesIntent = new Intent(this, Favorites.class);
+    		Intent nutritionFacts = new Intent(this, NutritionFacts.class);
 
-			//startActivity(favoritesIntent);
+			startActivity(nutritionFacts);
 			
     		return true;
     	
@@ -180,8 +182,23 @@ public class RecipeDetails extends Activity{
 		
 		@Override
 		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-			// TODO Auto-generated method stub
-			return false;
+			
+			switch (item.getItemId()){
+			case R.id.delete_icon:
+				
+				// -- getting into the setToJson stuff
+				SetToJSON newSetToJSON = new SetToJSON(getApplication());
+				newSetToJSON.deleteJSON(titleString);
+				
+				mode.finish();
+				return true;
+			default:
+				return false;
+			}
+
+			
+			
+
 		}
 	};
     

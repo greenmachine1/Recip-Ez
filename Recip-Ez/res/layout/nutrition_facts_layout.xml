@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color" >
+
+    <TextView
+        android:id="@+id/title_nutrition_facts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:textSize="18sp"
+        android:text="Nutrition Facts" />
+
+    <TextView
+        android:id="@+id/calories_text_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_nutrition_facts"
+        android:layout_marginTop="50dp"
+        android:layout_toLeftOf="@+id/title_nutrition_facts"
+        android:textSize="15sp"
+        android:text="Calories:" />
+
+    <TextView
+        android:id="@+id/fat_text_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/calories_text_field"
+        android:layout_below="@+id/calories_text_field"
+        android:layout_marginTop="18dp"
+        android:textSize="15sp"
+        android:text="Fat:" />
+
+    <TextView
+        android:id="@+id/saturated_fat_text_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fat_text_field"
+        android:layout_below="@+id/fat_text_field"
+        android:layout_marginTop="18dp"
+        android:textSize="15sp"
+        android:text="Saturated Fat:" />
+
+    <TextView
+        android:id="@+id/carbohydrates_text_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/saturated_fat_text_field"
+        android:layout_below="@+id/saturated_fat_text_field"
+        android:layout_marginTop="18dp"
+        android:textSize="15sp"
+        android:text="Carbohydrates:" />
+
+    <TextView
+        android:id="@+id/protein_text_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/carbohydrates_text_field"
+        android:layout_below="@+id/carbohydrates_text_field"
+        android:layout_marginTop="18dp"
+        android:textSize="15sp"
+        android:text="Protein:" />
+
+    <TextView
+        android:id="@+id/sodium_text_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/protein_text_field"
+        android:layout_below="@+id/protein_text_field"
+        android:layout_marginTop="18dp"
+        android:textSize="15sp"
+        android:text="Sodium:" />
+
+    <TextView
+        android:id="@+id/fiber_text_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sodium_text_field"
+        android:layout_below="@+id/sodium_text_field"
+        android:layout_marginTop="18dp"
+        android:textSize="15sp"
+        android:text="Fiber:" />
+
+    <TextView
+        android:id="@+id/cholesterol_text_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fiber_text_field"
+        android:layout_below="@+id/fiber_text_field"
+        android:layout_marginTop="18dp"
+        android:textSize="15sp"
+        android:text="Cholesterol:" />
+
+</RelativeLayout>

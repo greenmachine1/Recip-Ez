@@ -88,7 +88,7 @@ public class FavoritesJSONParsing {
 				}				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
-				Log.e("error", e.getMessage().toString());
+				Log.e("error with title", e.getMessage().toString());
 			}
 
 			return nameHashMap;
@@ -125,7 +125,7 @@ public class FavoritesJSONParsing {
 				
 				Log.i("url", urlHashMap.toString());
 			}catch(Exception e){
-				Log.e("error", e.getMessage().toString());
+				Log.e("error with url", e.getMessage().toString());
 			}
 			
 			return urlHashMap;
@@ -159,7 +159,7 @@ public class FavoritesJSONParsing {
 				}
 				Log.i("ingredients", ingredientsHashMap.toString());
 			}catch(Exception e){
-				Log.e("error", e.getMessage().toString());
+				Log.e("error with ingredients", e.getMessage().toString());
 			}
 			
 			return ingredientsHashMap;
@@ -193,7 +193,7 @@ public class FavoritesJSONParsing {
 				}
 				Log.i("directions", directionsHashMap.toString());
 			}catch(Exception e){
-				Log.e("error", e.getMessage().toString());
+				Log.e("error with directions", e.getMessage().toString());
 			}
 			
 			return directionsHashMap;

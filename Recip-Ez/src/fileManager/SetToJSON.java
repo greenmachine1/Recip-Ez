@@ -1,6 +1,7 @@
 package fileManager;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,9 +18,13 @@ public class SetToJSON {
 	Context _context;
 	
 	public final String NAME_OF_FILE = "favoritesJSON.txt";
+	
+	File file;
+	FileManager newFileManager;
 
 	public SetToJSON(Context context) {
 		_context = context;
+		
 	}
 	
 	
@@ -38,7 +43,7 @@ public class SetToJSON {
 		
 		String tempMainFileString = "";
 		
-		File file = _context.getFileStreamPath(NAME_OF_FILE);
+		file = _context.getFileStreamPath(NAME_OF_FILE);
 		
 		FileManager newFileManager = new FileManager();
 		
@@ -102,8 +107,51 @@ public class SetToJSON {
 		
 	}
 	
+	
+	
+	
+	// -- deletes the item passed in
 	public void deleteJSON(String itemToDelete){
 		
+		file = _context.getFileStreamPath(NAME_OF_FILE);
+		
+	
+		
+		Log.i("passed in name", itemToDelete);
+		if(file.exists() == true){
+			newFileManager = new FileManager();
+			
+			// -- reading in the file
+			String fileContents = newFileManager.readNewFile(_context, NAME_OF_FILE);
+			
+			try {
+				
+				// -- targetting the main json object
+				JSONObject mainObject = new JSONObject(fileContents);
+				
+				// -- targetting the 'main' array
+				JSONArray mainJSONArray = mainObject.getJSONArray("main");
+				
+				JSONObject newJSONObject = new JSONObject();
+				
+				Log.i("number of elements", "" + mainJSONArray.length());
+				
+				for(int i = 0; i < mainJSONArray.length(); i++){
+					
+					
+					newJSONObject = mainJSONArray.getJSONObject(i);
+					
+					Log.i("objecttssfsfs", newJSONObject.toString());
+					
+				}
+	
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				Log.e("error deleting", e.getMessage().toString());
+			}
+			
+		}
+
 	}
 	
 	
