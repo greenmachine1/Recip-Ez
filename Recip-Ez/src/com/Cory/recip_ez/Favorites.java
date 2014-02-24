@@ -31,12 +31,14 @@ public class Favorites extends FragmentActivity{
         // -- signifies that the calling activity
         // -- was the main activity
         if(cameFromMainActivity == true){
-        	
+        	Log.i("came from main is yes", "true");
         	// -- basically do nothing
         	
         // -- signifies that the calling activity
         // -- was the recipe details screen
         }else if(cameFromMainActivity == false){
+        	
+        	Log.i("not coming from main", "True");
         	
         	// -- start of the new JSON file creation
         	SetToJSON newSetToJSON = new SetToJSON(this);

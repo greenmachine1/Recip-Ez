@@ -35,6 +35,8 @@ public class RecipeDetails extends Activity{
 	String directionsString;
 	String imageUrl;
 	
+	int positionInList;
+	
 	boolean comingFromFavorites = false;
 	
 	private ShareActionProvider mShareActionProvider;
@@ -62,6 +64,9 @@ public class RecipeDetails extends Activity{
         // -- to set the action bar a certian way
         if(comingFromFavorites == true){
         	mActionMode = this.startActionMode(mActionModeCallBack);
+        	positionInList = extras.getInt("position");
+        	
+        	Log.i("position selected", "" + positionInList);
         }
         
         
@@ -136,6 +141,7 @@ public class RecipeDetails extends Activity{
     		favoritesIntent.putExtra("url", imageUrl);
     		favoritesIntent.putExtra("ingredients", ingredientsString);
     		favoritesIntent.putExtra("directions", directionsString);
+    		favoritesIntent.putExtra("fromMain", false);
     		
 
 			startActivity(favoritesIntent);
@@ -192,6 +198,7 @@ public class RecipeDetails extends Activity{
 				newSetToJSON.deleteJSON(titleString);
 				
 				mode.finish();
+				finish();
 				return true;
 			default:
 				return false;

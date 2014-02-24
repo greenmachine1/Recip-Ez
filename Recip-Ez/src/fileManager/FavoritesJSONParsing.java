@@ -41,6 +41,8 @@ public class FavoritesJSONParsing {
 			fileManager = new FileManager();
 			String favoritesJSONString = fileManager.readNewFile(_context, NAME_OF_FILE);
 			
+			Log.i("contents of file having issue", favoritesJSONString.toString());
+			
 			try {
 				// -- loading up the main object with the file 
 				// -- contents

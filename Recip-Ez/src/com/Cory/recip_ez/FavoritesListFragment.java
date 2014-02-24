@@ -1,5 +1,6 @@
 package com.Cory.recip_ez;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,37 +57,41 @@ public class FavoritesListFragment extends Fragment {
 		directionsArrayList.clear();
 		ingredientsArrayList.clear();
 
-		FavoritesJSONParsing newFavoritesParsing = new FavoritesJSONParsing(getActivity());
-		if(newFavoritesParsing.loadJSON() == true){
-			
-			nameHashMap = newFavoritesParsing.returnName();
-			
-			urlHashMap = newFavoritesParsing.returnUrl();
-			
-			ingredientsHashMap = newFavoritesParsing.returnIngredients();
-			
-			directionsHashMap = newFavoritesParsing.returnDirections();
-			
-			// -- putting the contents into the nameArrayList
-			for(String name:nameHashMap.values()){
-				nameArrayList.add(name);
-			}
-			
-			// -- putting the contents into the urlArrayList
-			for(String urlValue:urlHashMap.values()){
-				urlArrayList.add(urlValue);
-			}
-			
-			// -- putting the contents into the ingredientsArrayList
-			for(String ingredientsValue:ingredientsHashMap.values()){
-				ingredientsArrayList.add(ingredientsValue);
-			}
-			
-			// -- putting the contents into the directionsArrayList
-			for(String directionsValue:directionsHashMap.values()){
-				directionsArrayList.add(directionsValue);
-			}
+		File file = getActivity().getFileStreamPath("favoritesJSON.txt");
+		if(file.exists() == true){
+		
+			FavoritesJSONParsing newFavoritesParsing = new FavoritesJSONParsing(getActivity());
+			if(newFavoritesParsing.loadJSON() == true){
+				
+				nameHashMap = newFavoritesParsing.returnName();
+				
+				urlHashMap = newFavoritesParsing.returnUrl();
+				
+				ingredientsHashMap = newFavoritesParsing.returnIngredients();
+				
+				directionsHashMap = newFavoritesParsing.returnDirections();
+				
+				// -- putting the contents into the nameArrayList
+				for(String name:nameHashMap.values()){
+					nameArrayList.add(name);
+				}
+				
+				// -- putting the contents into the urlArrayList
+				for(String urlValue:urlHashMap.values()){
+					urlArrayList.add(urlValue);
+				}
+				
+				// -- putting the contents into the ingredientsArrayList
+				for(String ingredientsValue:ingredientsHashMap.values()){
+					ingredientsArrayList.add(ingredientsValue);
+				}
+				
+				// -- putting the contents into the directionsArrayList
+				for(String directionsValue:directionsHashMap.values()){
+					directionsArrayList.add(directionsValue);
+				}
 
+			}
 		}
 		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, nameArrayList);
 		
@@ -109,6 +114,7 @@ public class FavoritesListFragment extends Fragment {
 				recipeDetailsIntent.putExtra("url", urlArrayList.get(position));
 				recipeDetailsIntent.putExtra("ingredients", ingredientsArrayList.get(position));
 				recipeDetailsIntent.putExtra("comingFromFavorites", true);
+				recipeDetailsIntent.putExtra("position", position);
 				
 				startActivity(recipeDetailsIntent);
 				
@@ -135,36 +141,40 @@ public class FavoritesListFragment extends Fragment {
 		directionsArrayList.clear();
 		ingredientsArrayList.clear();
 
-		FavoritesJSONParsing newFavoritesParsing = new FavoritesJSONParsing(getActivity());
-		if(newFavoritesParsing.loadJSON() == true){
-			nameHashMap = newFavoritesParsing.returnName();
+		File file = getActivity().getFileStreamPath("favoritesJSON.txt");
+		
+		if(file.exists() == true){
+			FavoritesJSONParsing newFavoritesParsing = new FavoritesJSONParsing(getActivity());
 			
-			urlHashMap = newFavoritesParsing.returnUrl();
-			
-			ingredientsHashMap = newFavoritesParsing.returnIngredients();
-			
-			directionsHashMap = newFavoritesParsing.returnDirections();
-			
-			// -- putting the contents into the nameArrayList
-			for(String name:nameHashMap.values()){
-				nameArrayList.add(name);
+			if(newFavoritesParsing.loadJSON() == true){
+				nameHashMap = newFavoritesParsing.returnName();
+				
+				urlHashMap = newFavoritesParsing.returnUrl();
+				
+				ingredientsHashMap = newFavoritesParsing.returnIngredients();
+				
+				directionsHashMap = newFavoritesParsing.returnDirections();
+				
+				// -- putting the contents into the nameArrayList
+				for(String name:nameHashMap.values()){
+					nameArrayList.add(name);
+				}
+				
+				// -- putting the contents into the urlArrayList
+				for(String urlValue:urlHashMap.values()){
+					urlArrayList.add(urlValue);
+				}
+				
+				// -- putting the contents into the ingredientsArrayList
+				for(String ingredientsValue:ingredientsHashMap.values()){
+					ingredientsArrayList.add(ingredientsValue);
+				}
+				
+				// -- putting the contents into the directionsArrayList
+				for(String directionsValue:directionsHashMap.values()){
+					directionsArrayList.add(directionsValue);
+				}
 			}
-			
-			// -- putting the contents into the urlArrayList
-			for(String urlValue:urlHashMap.values()){
-				urlArrayList.add(urlValue);
-			}
-			
-			// -- putting the contents into the ingredientsArrayList
-			for(String ingredientsValue:ingredientsHashMap.values()){
-				ingredientsArrayList.add(ingredientsValue);
-			}
-			
-			// -- putting the contents into the directionsArrayList
-			for(String directionsValue:directionsHashMap.values()){
-				directionsArrayList.add(directionsValue);
-			}
-			
 		}
 		adapter.notifyDataSetChanged();
 	}

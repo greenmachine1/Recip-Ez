@@ -73,6 +73,7 @@ public class SetToJSON {
 			
 			topLevelObject.put("main", topLevelArray);
 			
+			Log.i("top level object to be saved", topLevelObject.toString());
 
 			// -- if the file does not exist, make it
 			if(!(file.exists()) == true){
@@ -114,10 +115,7 @@ public class SetToJSON {
 	public void deleteJSON(String itemToDelete){
 		
 		file = _context.getFileStreamPath(NAME_OF_FILE);
-		
-		ArrayList<String> nameOfRecipe = new ArrayList<String>();
-		
-		Log.i("passed in name", itemToDelete);
+
 		
 		if(file.exists() == true){
 			newFileManager = new FileManager();
@@ -133,26 +131,77 @@ public class SetToJSON {
 				// -- targetting the 'main' array
 				JSONArray mainJSONArray = mainObject.getJSONArray("main");
 				
-				String newJSONRecipeString;
-				
-				Log.i("number of elements", "" + mainJSONArray.length());
-				
 				for(int i = 0; i < mainJSONArray.length(); i++){
+					String nameOfRecipeToDelete = mainJSONArray.getJSONObject(i).names().toString();
+					String modifiedNameString = cutTheFatFromNamesList(nameOfRecipeToDelete);
 					
-					newJSONRecipeString = mainJSONArray.getJSONObject(i).names().toString();
+					if(modifiedNameString.equals(itemToDelete)){
+						Log.i("yes", "yes it is equal to " + itemToDelete);
+						
+						//JSONArray itemToDeleteArray = mainJSONArray.getJSONObject(i).getJSONArray(itemToDelete);
+						
+						mainJSONArray.getJSONObject(i).remove(itemToDelete);
+						
+						//Log.i("array value", itemToDeleteArray.toString());
+					}
 					
-					nameOfRecipe.add(newJSONRecipeString);
 				}
 				
-				Log.i("recipesssss", nameOfRecipe.toString());
+				
+				if((cutTheFatFromMainFile(mainJSONArray.toString()).equals("") == true)){
+					
+					file.delete();
+					
+				}else if((cutTheFatFromMainFile(mainJSONArray.toString()).equals("[{}]") == true)){
+				
+					Log.i("file contains", cutTheFatFromMainFile(mainJSONArray.toString()));
+					
+					file.delete();
+
+				}else if((cutTheFatFromMainFile(mainJSONArray.toString()).equals("{\"main\":}") == true)){
+					
+					file.delete();
+				}
+				else{
+					String fileWithMain = "{\"main\":" + cutTheFatFromMainFile(mainJSONArray.toString()) + "}";
+					
+					// -- writing back to the file
+					newFileManager.writeStringFile(_context, NAME_OF_FILE, fileWithMain);
+				}
+				
+				
 	
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				Log.e("error deleting", e.getMessage().toString());
 			}
 			
+			
+			
 		}
 
+	}
+	
+	public String cutTheFatFromMainFile(String mainString){
+		
+		Log.i("passed in string", mainString);
+		String finalString = "";
+		
+		if(mainString.contains("{},")){
+			finalString = mainString.replace("{},", "");
+		}else if(mainString.contains(",{},")){
+			finalString = mainString.replace(",{},", ",");
+		}else if(mainString.contains(",{}")){
+			finalString = mainString.replace(",{}", "");
+
+		}else if(mainString.contains("[{}]")){
+			finalString = mainString.replace("[{}]", "");
+		}else if(mainString.contains("\"main\":[{}]")){
+			finalString = mainString.replace("\"main\":[{}]", "");
+		}
+		
+		Log.i("final string contents", finalString);
+		return finalString;
 	}
 	
 	
