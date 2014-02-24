@@ -162,6 +162,8 @@ public class SetToJSON {
 					
 					file.delete();
 				}
+				
+				// -- write to file
 				else{
 					String fileWithMain = "{\"main\":" + cutTheFatFromMainFile(mainJSONArray.toString()) + "}";
 					
@@ -175,16 +177,15 @@ public class SetToJSON {
 				// TODO Auto-generated catch block
 				Log.e("error deleting", e.getMessage().toString());
 			}
-			
-			
-			
+
 		}
 
 	}
+
 	
+	
+	// -- trimming up the main file
 	public String cutTheFatFromMainFile(String mainString){
-		
-		Log.i("passed in string", mainString);
 		String finalString = "";
 		
 		if(mainString.contains("{},")){
@@ -193,18 +194,16 @@ public class SetToJSON {
 			finalString = mainString.replace(",{},", ",");
 		}else if(mainString.contains(",{}")){
 			finalString = mainString.replace(",{}", "");
-
 		}else if(mainString.contains("[{}]")){
 			finalString = mainString.replace("[{}]", "");
 		}else if(mainString.contains("\"main\":[{}]")){
 			finalString = mainString.replace("\"main\":[{}]", "");
 		}
 		
-		Log.i("final string contents", finalString);
 		return finalString;
 	}
 	
-	
+	// -- trimming the name variables
 	public String cutTheFatFromNamesList(String name){
 		
 		String withoutFrontBracketAndQuote = name.replace("[\"", "");
