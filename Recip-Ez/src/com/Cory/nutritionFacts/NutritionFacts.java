@@ -40,7 +40,6 @@ public class NutritionFacts extends Activity{
 	        
 	        // -- start of my service
 	        Intent edamamServiceIntent = new Intent(this, EdamamService.class);
-	        edamamServiceIntent.putExtra("ingredients", ingredientsString);
 	        
 	        startService(edamamServiceIntent);
 
