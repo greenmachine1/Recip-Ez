@@ -2,6 +2,8 @@ package com.Cory.nutritionFacts;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -12,10 +14,16 @@ import android.util.Log;
 import com.Cory.recip_ez.R;
 import com.Cory.service_package.EdamamService;
 
+import fileManager.FileManager;
+
 public class NutritionFacts extends Activity{
 	
 	String ingredientsString;
 	String titleString;
+	
+	public final String NAME_OF_FILE = "nutrition.txt";
+	
+	FileManager fileManager;
 
 	   @Override
 	    protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +65,6 @@ public class NutritionFacts extends Activity{
 			   Log.i("string split", splitStrings[i].toString());
 			   ingredientsArray.add(splitStrings[i].toString());
 		   }
-		   
-		   Log.i("ingredients array", ingredientsArray.get(0).toString());
 
 		   
 		   // -- start of saving and converting title and ingredients
@@ -67,11 +73,39 @@ public class NutritionFacts extends Activity{
 		   
 	   }
 	   
+	   
+	   
+	   
 	   // -- saves the data to json format
 	   public void saveToJSONFormat(String title, ArrayList<String> ingredientsArray){
 		   
-		   JSONObject mainObject = new JSONObject();
+		   fileManager = new FileManager();
 		   
+		   JSONObject mainObject = new JSONObject();
+		   JSONObject ingredientsArrayObject = new JSONObject();
+		   try {
+			
+			
+			   JSONArray ingredientsJSONArray = new JSONArray();
+			   for(int i = 0; i < ingredientsArray.size(); i++){
+				
+				   String temp = new String();
+				   temp = ingredientsArray.get(i).toString();
+				
+				   ingredientsJSONArray.put(temp);
+			   }
+			   
+			mainObject.put("ingr", ingredientsJSONArray);
+			
+			mainObject.put("title", title);
+
+			// -- finally savng the file in the proper format
+			fileManager.writeStringFile(getApplication(), NAME_OF_FILE, mainObject.toString());
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			Log.e("json error", e.getMessage().toString());
+		}
 		   
 		   
 	   }
@@ -80,12 +114,16 @@ public class NutritionFacts extends Activity{
 	   
 	   
 	   
+	   
+	   
 	   // -- removal of the brackets
 	   public String removeFatFromString(String passedInString){
+		   
 		   
 		   String stringWithoutBracket = passedInString.replace("[", "");
 		   String finalStringWithoutBrackets = stringWithoutBracket.replace("]", "");
 		   
+		  
 		return finalStringWithoutBrackets;
 		   
 	   }
