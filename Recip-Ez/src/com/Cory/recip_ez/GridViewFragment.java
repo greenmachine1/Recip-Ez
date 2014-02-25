@@ -90,7 +90,7 @@ public class GridViewFragment extends Fragment{
 				ingredientsHashMap.clear();
 				
 				boolean intentThing = intent.getBooleanExtra("DONE", false);
-				Log.i("returned value", "" + intentThing);
+
 				if(intentThing == true){
 					
 					// -- start of the parseJSON class

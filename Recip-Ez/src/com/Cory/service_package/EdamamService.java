@@ -46,7 +46,9 @@ public class EdamamService extends IntentService {
 		FileManager fileManager = new FileManager();
 		fileManager.writeStringFile(getApplication(), FILE_NAME, downloadTheText(startOfUrl));
 
-		
+		// -- sends out a true signal that the service has ended
+		Intent newIntent = new Intent("android.intent.action.MAIN").putExtra("DONE", true);
+		this.sendBroadcast(newIntent);
 		
 		this.stopSelf();
 	}
@@ -74,7 +76,6 @@ public class EdamamService extends IntentService {
 			HttpResponse response = null;
 			try{
 				HttpPost post = new HttpPost(url);
-				Log.i("this is getting hit", "yes");
 				StringEntity stringEntity = new StringEntity(fileContents);
 				stringEntity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 				post.setEntity(stringEntity);
@@ -126,6 +127,8 @@ public class EdamamService extends IntentService {
 		}catch(IOException e){
 			return "";
 		}
+		
+		Log.i("last element", "true");
 		return str;
 	}
 

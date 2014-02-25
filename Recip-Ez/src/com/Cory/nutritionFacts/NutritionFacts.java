@@ -1,5 +1,6 @@
 package com.Cory.nutritionFacts;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -7,7 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -24,6 +28,10 @@ public class NutritionFacts extends Activity{
 	public final String NAME_OF_FILE = "nutrition.txt";
 	
 	FileManager fileManager;
+	
+	private BroadcastReceiver myReciever;
+	
+	IntentFilter intentFilter;
 
 	   @Override
 	    protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +50,55 @@ public class NutritionFacts extends Activity{
 	        Intent edamamServiceIntent = new Intent(this, EdamamService.class);
 	        
 	        startService(edamamServiceIntent);
+	        
+	        intentFilter = new IntentFilter("android.intent.action.MAIN");
+	        
+	        myReciever = new BroadcastReceiver(){
+
+				@Override
+				public void onReceive(Context context, Intent intent) {
+					// TODO Auto-generated method stub
+					
+					// -- getting the call back from the edamam service 
+					boolean intentThing = intent.getBooleanExtra("DONE", false);
+					if(intentThing == true){
+						
+						File file = getApplication().getFileStreamPath(NAME_OF_FILE);
+						if(file.exists()){
+						
+							String openJSONFile = fileManager.readNewFile(getApplication(), NAME_OF_FILE);
+						
+						}
+						
+					}
+					
+				}
+	        
+	        };
+	        
+	     // -- setting the reciever to be registered
+		this.registerReceiver(myReciever, intentFilter);
 
 	   }
+	   
+	   
+	   @Override
+	   public void onResume() {
+		   // TODO Auto-generated method stub
+		   super.onResume();
+			
+		   // -- setting the reciever to be registered
+		   this.registerReceiver(myReciever, intentFilter);
+	   }
+		
+		@Override
+		public void onStop() {
+			// TODO Auto-generated method stub
+			super.onStop();
+
+			// -- unregistering the reciever
+			this.unregisterReceiver(myReciever);
+		}
 	   
 	   
 	   
