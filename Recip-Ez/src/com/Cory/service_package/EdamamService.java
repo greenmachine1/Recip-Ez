@@ -43,6 +43,7 @@ public class EdamamService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
+		
 		FileManager fileManager = new FileManager();
 		fileManager.writeStringFile(getApplication(), FILE_NAME, downloadTheText(startOfUrl));
 
