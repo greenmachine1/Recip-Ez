@@ -143,13 +143,9 @@ public class SetToJSON {
 					String modifiedNameString = cutTheFatFromNamesList(nameOfRecipeToDelete);
 					
 					if(modifiedNameString.equals(itemToDelete)){
-						Log.i("yes", "yes it is equal to " + itemToDelete);
-						
-						//JSONArray itemToDeleteArray = mainJSONArray.getJSONObject(i).getJSONArray(itemToDelete);
 						
 						mainJSONArray.getJSONObject(i).remove(itemToDelete);
-						
-						//Log.i("array value", itemToDeleteArray.toString());
+
 					}
 					
 				}
@@ -160,8 +156,6 @@ public class SetToJSON {
 					file.delete();
 					
 				}else if((cutTheFatFromMainFile(mainJSONArray.toString()).equals("[{}]") == true)){
-				
-					Log.i("file contains", cutTheFatFromMainFile(mainJSONArray.toString()));
 					
 					file.delete();
 
@@ -197,16 +191,23 @@ public class SetToJSON {
 		
 		if(mainString.contains("{},")){
 			finalString = mainString.replace("{},", "");
-		}else if(mainString.contains(",{},")){
+		}
+		else if(mainString.contains(",{},")){
 			finalString = mainString.replace(",{},", ",");
-		}else if(mainString.contains(",{}")){
+		}
+		else if(mainString.contains(",{}")){
 			finalString = mainString.replace(",{}", "");
-		}else if(mainString.contains("[{}]")){
+		}
+		else if(mainString.contains("[{}]")){
 			finalString = mainString.replace("[{}]", "");
-		}else if(mainString.contains("\"main\":[{}]")){
+		}
+		else if(mainString.contains("\"main\":[{}]")){
 			finalString = mainString.replace("\"main\":[{}]", "");
-		}else if(mainString.contains(",]")){
-			finalString = mainString.replace(",]", "");
+		}
+		else if(mainString.contains(",{}]")){
+			finalString = mainString.replace(",{}]", "");
+		}else{
+			finalString = mainString;
 		}
 		
 		return finalString;

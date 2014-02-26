@@ -46,9 +46,12 @@ public class FavoritesJSONParsing {
 		if(file.exists() == true){
 			
 			fileManager = new FileManager();
-			String favoritesJSONString = fileManager.readNewFile(_context, NAME_OF_FILE);
 			
-			Log.i("contents of file having issue", favoritesJSONString.toString());
+			// -- this right here needs to have some shaving down
+			// -- of the string
+			String favoritesJSONString = fileManager.readNewFile(_context, NAME_OF_FILE);
+
+			Log.i("contents of file having issue", favoritesJSONString);
 			
 			try {
 				// -- loading up the main object with the file 
@@ -90,8 +93,6 @@ public class FavoritesJSONParsing {
 					
 					namesOfRecipes.add(nameString);
 					
-					Log.i("name", nameString);
-					
 					nameHashMap.put(nameString, nameString);
 					
 				}				
@@ -107,6 +108,7 @@ public class FavoritesJSONParsing {
 		return null;
 	}
 	
+	// -- returns url hashmap
 	public HashMap<String, String> returnUrl(){
 		
 		HashMap<String, String> urlHashMap = new HashMap<String, String>();
@@ -142,7 +144,7 @@ public class FavoritesJSONParsing {
 		return null;
 	}
 	
-	
+	// -- returns ingredients hashmap
 	public HashMap<String, String> returnIngredients(){
 		
 		HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();
@@ -166,7 +168,6 @@ public class FavoritesJSONParsing {
 					ingredientsHashMap.put(namesOfRecipes.get(i), ingredientsString);
 					
 				}
-				Log.i("ingredients", ingredientsHashMap.toString());
 			}catch(Exception e){
 				Log.e("error with ingredients", e.getMessage().toString());
 			}
@@ -177,6 +178,8 @@ public class FavoritesJSONParsing {
 		return null;
 	}
 	
+	
+	// -- returns the directions hashmap
 	public HashMap<String, String> returnDirections(){
 		
 		HashMap<String, String> directionsHashMap = new HashMap<String, String>();
@@ -200,7 +203,6 @@ public class FavoritesJSONParsing {
 					directionsHashMap.put(namesOfRecipes.get(i), directionsString);
 					
 				}
-				Log.i("directions", directionsHashMap.toString());
 			}catch(Exception e){
 				Log.e("error with directions", e.getMessage().toString());
 			}
@@ -214,7 +216,7 @@ public class FavoritesJSONParsing {
 	
 	
 	
-	
+	// -- crops the url string
 	public String cropUrlString(String urlString){
 		
 		String minusAngleBrackets = urlString.replace("\\", "");
