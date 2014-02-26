@@ -43,7 +43,14 @@ public class FavoritesListFragment extends Fragment {
 
 	ListView listView;
 	
+	Favorites_adapter newFavoritesAdapter;
+	
+	// -- custom array list
+	public ArrayList<Favorites_adapter_definition> favoritesList = new ArrayList<Favorites_adapter_definition>();
+	
 	ArrayAdapter<String> adapter;
+	
+	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +61,9 @@ public class FavoritesListFragment extends Fragment {
 		view = inflater.inflate(R.layout.favorites_fragment, container, false);
 		
 		listView = (ListView)view.findViewById(R.id.favorites_list_view);
+		
+		// -- setting up the costom adapter
+		newFavoritesAdapter = new Favorites_adapter(getActivity(), R.layout.favorites_list_item, favoritesList);
 		
 		nameHashMap.clear();
 		urlHashMap.clear();
@@ -100,9 +110,22 @@ public class FavoritesListFragment extends Fragment {
 
 			}
 		}
-		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, nameArrayList);
 		
-		listView.setAdapter(adapter);
+		
+		// -- setting up the costom adapter
+		//newFavoritesAdapter = new Favorites_adapter(getActivity(), R.layout.favorites_list_item, favoritesList);
+		favoritesList.clear();
+		
+		for(int i = 0; i < nameArrayList.size(); i++){
+			Favorites_adapter_definition item = new Favorites_adapter_definition(nameArrayList.get(i).toString(), R.drawable.ic_blue_star);
+			favoritesList.add(item);
+			newFavoritesAdapter.notifyDataSetChanged();
+		}
+		
+		//newFavoritesAdapter.notifyDataSetChanged();
+		
+		
+		listView.setAdapter(newFavoritesAdapter);
 		
 	
 		listView.setOnItemClickListener(new OnItemClickListener(){
@@ -183,7 +206,14 @@ public class FavoritesListFragment extends Fragment {
 				}
 			}
 		}
-		adapter.notifyDataSetChanged();
+		
+		favoritesList.clear();
+		for(int i = 0; i < nameArrayList.size(); i++){
+			Favorites_adapter_definition item = new Favorites_adapter_definition(nameArrayList.get(i).toString(), R.drawable.ic_blue_star);
+			favoritesList.add(item);
+			//newFavoritesAdapter.notifyDataSetChanged();
+		}
+		newFavoritesAdapter.notifyDataSetChanged();
 	}
 	
 }

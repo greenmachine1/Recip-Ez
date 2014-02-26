@@ -46,8 +46,9 @@ public class GridViewFragment extends Fragment{
 	
 	public final boolean CAME_FROM_MAIN = true;
 
-	
+	// -- arrayList adapter
 	public ArrayList<GridViewAdapterDefinition> items = new ArrayList<GridViewAdapterDefinition>();
+	
 	public HashMap<String, String> imagesHashMap = new HashMap<String, String>();
 	public HashMap<String, String> directionsHashMap = new HashMap<String, String>();
 	public HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();

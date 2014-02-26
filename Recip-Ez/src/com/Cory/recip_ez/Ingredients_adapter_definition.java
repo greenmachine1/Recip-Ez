@@ -7,7 +7,6 @@
  */
 package com.Cory.recip_ez;
 
-import android.graphics.drawable.Drawable;
 
 public class Ingredients_adapter_definition {
 

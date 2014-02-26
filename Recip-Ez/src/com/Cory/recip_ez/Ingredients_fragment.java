@@ -73,6 +73,7 @@ public class Ingredients_fragment extends Fragment{
 			ingredientsAndCheckIcon.add(item);
 		}
 		
+		
 		newIngredientsAdapter.notifyDataSetChanged();
 		
 		ListView listView = (ListView)view.findViewById(R.id.ingredients_list);
