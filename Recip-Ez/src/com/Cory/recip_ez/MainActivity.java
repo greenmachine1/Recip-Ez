@@ -98,7 +98,6 @@ public class MainActivity extends FragmentActivity {
 
 			startActivity(ingredientsIntent);
     		
-    		
     		return true;
     		
     		

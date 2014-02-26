@@ -7,10 +7,10 @@
  */
 package com.Cory.recip_ez;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
-public class IngredientsSearch extends Activity{
+public class IngredientsSearch extends FragmentActivity{
 
 	
 	@Override
@@ -19,6 +19,7 @@ public class IngredientsSearch extends Activity{
         setContentView(R.layout.ingredients_activity);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        
         
     }
 }
