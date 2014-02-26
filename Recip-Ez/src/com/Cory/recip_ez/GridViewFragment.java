@@ -27,8 +27,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.Cory.availableRecipes.AvailableRecipes;
+import com.Cory.service_package.WebInfo;
+
 import come.Cory.recipeDetails.RecipeDetails;
 
 import fileManager.ParseJSON;
@@ -142,29 +145,42 @@ public class GridViewFragment extends Fragment{
 		
 		// -- targetting the user search box
 		userSearch = (EditText)view.findViewById(R.id.user_search_main);
-		userSearch.setOnKeyListener(new OnKeyListener(){
+		
+			userSearch.setOnKeyListener(new OnKeyListener(){
 
-			@Override
-			public boolean onKey(View viewText, int keyCode, KeyEvent event) {
-				
-				if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
+				@Override
+				public boolean onKey(View viewText, int keyCode, KeyEvent event) {
 					
-					String userEntered = userSearch.getText().toString();
-
-					// -- starts the available recipes intent
-					Intent availableRecipesIntent = new Intent(getActivity(), AvailableRecipes.class);
-					
-					// -- sending over the user input search
-					availableRecipesIntent.putExtra("search", userEntered);
-					
-					startActivity(availableRecipesIntent);
-					
-					
-					return true;
+					if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
+						
+						WebInfo newWebInfo = new WebInfo();
+					    if(newWebInfo.getConnectionStatus(getActivity()) == true){
+							String userEntered = userSearch.getText().toString();
+		
+							// -- starts the available recipes intent
+							Intent availableRecipesIntent = new Intent(getActivity(), AvailableRecipes.class);
+							
+							// -- sending over the user input search
+							availableRecipesIntent.putExtra("search", userEntered);
+							
+							startActivity(availableRecipesIntent);
+					    
+						
+							return true;
+							
+					    }else{
+					    	
+					    	Toast toast = Toast.makeText(getActivity(), "Please connect to the internet", Toast.LENGTH_LONG);
+					    	toast.show();
+					    	
+					    }
+					}
+					return false;
 				}
-				return false;
-			}
-		});
+		    
+			});
+	    
+		
 		
 		GridView gridView = (GridView)view.findViewById(R.id.gridView1);
 
