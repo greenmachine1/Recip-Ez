@@ -11,13 +11,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
-
-
 import fileManager.FileManager;
 
 public class EdamamService extends IntentService {
@@ -71,28 +72,32 @@ public class EdamamService extends IntentService {
 			
 			// -- loading the file into a string to be passed on
 			String fileContents = fileManager.readNewFile(getApplication(), "nutrition.txt");
-		
+			
 			HttpClient client = new DefaultHttpClient();
+			
 			InputStream inputStream = null;
 			HttpResponse response = null;
 			try{
 				HttpPost post = new HttpPost(url);
 				StringEntity stringEntity = new StringEntity(fileContents);
+				
+				// -- setting the content type 
 				stringEntity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 				post.setEntity(stringEntity);
+				
+				// -- executing the call
 				response = client.execute(post);
 				
 				if(response != null){
 					inputStream = response.getEntity().getContent();
 					
-					Log.i("response", inputStream.toString());
 					return inputStream;
 				}
 				
 			}catch (Exception e){
 				Log.e("json error", e.getMessage().toString());
 			}
-			
+				
 		}
 		
 		return null;
@@ -128,8 +133,7 @@ public class EdamamService extends IntentService {
 		}catch(IOException e){
 			return "";
 		}
-		
-		Log.i("last element", "true");
+
 		return str;
 	}
 

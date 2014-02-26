@@ -198,6 +198,8 @@ public class SetToJSON {
 			finalString = mainString.replace("[{}]", "");
 		}else if(mainString.contains("\"main\":[{}]")){
 			finalString = mainString.replace("\"main\":[{}]", "");
+		}else if(mainString.contains(",]")){
+			finalString = mainString.replace(",]", "");
 		}
 		
 		return finalString;

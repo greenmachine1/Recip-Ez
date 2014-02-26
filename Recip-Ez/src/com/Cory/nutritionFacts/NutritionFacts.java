@@ -8,13 +8,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Cory.recip_ez.R;
 import com.Cory.service_package.EdamamService;
@@ -120,6 +127,12 @@ public class NutritionFacts extends Activity{
 			   if(firstElement.contains("message")){
 				   
 				   Log.i("error no data", "no data for this recipe");
+				   
+				   Toast toast = Toast.makeText(getApplication(), "No Nutritional Data found", Toast.LENGTH_LONG);
+					
+				   toast.show();
+				   
+				   finish();
 				   
 			   // -- the recipe data recieved is processable	   
 			   }else{
@@ -309,18 +322,12 @@ public class NutritionFacts extends Activity{
 			// -- finally savng the file in the proper format
 			fileManager.writeStringFile(getApplication(), NAME_OF_FILE, mainObject.toString());
 			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			Log.e("json error", e.getMessage().toString());
-		}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				Log.e("json error", e.getMessage().toString());
+			}
 	   }
-	   
-	   
-	   
-	   
-	   
-	   
-	   
+
 	   // -- removal of the brackets
 	   public String removeFatFromString(String passedInString){
 		  
@@ -330,4 +337,10 @@ public class NutritionFacts extends Activity{
 		   return finalStringWithoutBrackets;
 		   
 	   }
+	   
+	   
+	  
+	   
 }
+
+
