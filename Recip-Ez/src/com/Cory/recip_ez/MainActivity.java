@@ -49,12 +49,8 @@ public class MainActivity extends FragmentActivity {
             serviceIntent.putExtra("offset", 0);
             
             startService(serviceIntent);
-            
         }
         
-        
-        
-  
     }
 
 

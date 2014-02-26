@@ -36,7 +36,8 @@
         </activity>
         <activity android:name="IngredientsSearch"
             android:label="Ingredients Search"
-            android:parentActivityName="com.Cory.recip_ez.MainActivity">
+            android:parentActivityName="com.Cory.recip_ez.MainActivity"
+            android:screenOrientation="portrait">
         </activity>
         
         <service android:name="com.Cory.service_package.PearsonAPIService"></service>

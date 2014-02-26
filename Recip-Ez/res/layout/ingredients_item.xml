@@ -11,16 +11,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="18dp"
+        android:textSize="20sp"
         android:text="TextView" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
+    <ImageView
+        android:id="@+id/check_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/ingredient_title"
-        android:layout_alignBottom="@+id/ingredient_title"
-        android:layout_alignParentRight="true"
-        android:focusable="false"
-        android:layout_marginRight="24dp" />
+        android:layout_centerInParent="true"
+        android:paddingLeft="280dp"/>
 
 </RelativeLayout>

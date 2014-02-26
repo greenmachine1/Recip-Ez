@@ -43,21 +43,14 @@ public class GridViewFragment extends Fragment{
 	
 	public final boolean CAME_FROM_MAIN = true;
 
-	// my items arrayList
+	
 	public ArrayList<GridViewAdapterDefinition> items = new ArrayList<GridViewAdapterDefinition>();
-	
 	public HashMap<String, String> imagesHashMap = new HashMap<String, String>();
-	
 	public HashMap<String, String> directionsHashMap = new HashMap<String, String>();
-	
 	public HashMap<String, String> ingredientsHashMap = new HashMap<String, String>();
-	
 	public ArrayList<String> urlArrayList = new ArrayList<String>();
-	
 	public ArrayList<String> nameOfRecipeArrayList = new ArrayList<String>();
-	
 	public ArrayList<String> directionsArrayList = new ArrayList<String>();
-	
 	public ArrayList<String> ingredientsArrayList = new ArrayList<String>();
 	
 	private BroadcastReceiver myReciever;
@@ -166,7 +159,6 @@ public class GridViewFragment extends Fragment{
 					
 					startActivity(availableRecipesIntent);
 					
-					Log.i("user has pressed enter", userEntered);
 					
 					return true;
 				}
