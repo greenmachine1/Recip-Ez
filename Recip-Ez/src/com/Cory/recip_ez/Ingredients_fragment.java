@@ -1,3 +1,10 @@
+/*
+ * Developers name 	Cory Green
+ * 
+ * Project name		Recip-Ez
+ * 
+ * Date				Feb 26, 2014
+ */
 package com.Cory.recip_ez;
 
 import java.util.ArrayList;
@@ -68,8 +75,6 @@ public class Ingredients_fragment extends Fragment{
 		
 		newIngredientsAdapter.notifyDataSetChanged();
 		
-		
-		
 		ListView listView = (ListView)view.findViewById(R.id.ingredients_list);
 		
 		listView.setAdapter(newIngredientsAdapter);
@@ -90,20 +95,18 @@ public class Ingredients_fragment extends Fragment{
 					newIngredientsAdapter.notifyDataSetChanged();
 					
 					finalArrayList.add(nameOfIngredients[position]);
-					
 					toggle.set(position, "true");
+					
 				}else if(toggle.get(position).equals("true")){
 					Ingredients_adapter_definition item = new Ingredients_adapter_definition(nameOfIngredients[position], R.drawable.ic_checkbox_unchecked);
 					ingredientsAndCheckIcon.set(position, item);
 					newIngredientsAdapter.notifyDataSetChanged();
 					
 					finalArrayList.remove(nameOfIngredients[position]);
-					
 					toggle.set(position, "false");
 				}
 				
 			}
-			
 			
 		});
 		
@@ -115,11 +118,10 @@ public class Ingredients_fragment extends Fragment{
 			@Override
 			public void onClick(View v) {
 				
-				
+				// -- if the array is empty
 				if(finalArrayList.size() == 0){
 					
 					Toast toast = Toast.makeText(getActivity(), "Please enter more ingredients to search for.", Toast.LENGTH_LONG);
-					
 					toast.show();
 					
 				}else{
@@ -133,6 +135,7 @@ public class Ingredients_fragment extends Fragment{
 						finalPassedInString = finalPassedInString + " " +tempString;
 					}
 					
+					// -- replacing the whitespace with a '+'
 					String tempFinalString = null;
 					if(finalPassedInString.contains(" ")){
 						tempFinalString = finalPassedInString.replace(" ", "+");
@@ -151,7 +154,6 @@ public class Ingredients_fragment extends Fragment{
 					
 					startActivity(availableRecipesIntent);
 					
-						
 				}
 			}
 		});

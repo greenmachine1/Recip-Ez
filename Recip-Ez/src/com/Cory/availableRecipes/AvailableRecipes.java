@@ -1,3 +1,10 @@
+/*
+ * Developers name 	Cory Green
+ * 
+ * Project name		Recip-Ez
+ * 
+ * Date				Feb 26, 2014
+ */
 package com.Cory.availableRecipes;
 
 import com.Cory.recip_ez.R;
