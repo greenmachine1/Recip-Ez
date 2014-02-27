@@ -7,7 +7,6 @@
  */
 package com.Cory.recip_ez;
 
-import fileManager.ParseJSON;
 import android.app.Activity;
 import android.os.Bundle;
 

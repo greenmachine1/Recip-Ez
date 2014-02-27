@@ -8,10 +8,10 @@
 package com.Cory.recip_ez;
 
 
-import fileManager.SetToJSON;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import fileManager.SetToJSON;
 
 public class Favorites extends FragmentActivity{
 	
@@ -19,6 +19,8 @@ public class Favorites extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favorites_layout);
+        
+        
         
         Bundle extrasBundle = getIntent().getExtras();
         
